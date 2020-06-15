@@ -44,7 +44,7 @@ These are the steps to follow:
 # Inside your Podfile
 
 # 1. Load the file
-load 'remove_unsupported_libraries.rb'
+load 'remove_ios_only_frameworks.rb'
 
 ######  YOUR TARGETS  ######
 
