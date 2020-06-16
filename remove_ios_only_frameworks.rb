@@ -115,16 +115,16 @@ class PBXNativeTarget
   # - Headers
   def add_platform_filter_to_build_phases platform
     loggs "\t\t- Filtering resources"
-    resources_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.name end
+    resources_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.name.to_s end
     
     loggs "\t\t- Filtering compile sources"
-    source_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.name end
+    source_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.name.to_s end
     
     loggs "\t\t- Filtering frameworks"
-    frameworks_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.name end
+    frameworks_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.name.to_s end
     
     loggs "\t\t- Filtering headers"
-    headers_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.name end
+    headers_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.name.to_s end
   end
 
 end
@@ -182,7 +182,7 @@ class AbstractTarget
   def add_platform_filter_to_dependencies platform
     loggs "\t\t- Filtering dependencies"
     dependencies.each do |dependency|
-      dependency.platform_filter = platform.name
+      dependency.platform_filter = platform.name.to_s
     end
   end
 
@@ -215,7 +215,7 @@ class AbstractTarget
 
   def to_dependency
     # We return both as we don't know if build as library or framework
-    return [PodDependency.newFramework(module_name), PodDependency.newLibrary(module_name)]
+    return [PodDependency.newFramework(module_name), PodDependency.newLibrary(name)]
   end
 
   # Dependencies contained in Other Linker Flags
@@ -292,19 +292,19 @@ class OSPlatform
   attr_reader :architectures
 
   def self.ios
-    OSPlatform.new 'ios', 'iphone*', ['arm64', 'armv7s', 'armv7']
+    OSPlatform.new :ios, 'iphone*', ['arm64', 'armv7s', 'armv7']
   end
 
   def self.macos
-    OSPlatform.new 'macos', 'macosx*', ['x86_64']
+    OSPlatform.new :macos, 'macosx*', ['x86_64']
   end
 
   def self.wtachos
-    OSPlatform.new 'watchos', 'watchos*', ['arm64_32', 'armv7k']
+    OSPlatform.new :watchos, 'watchos*', ['arm64_32', 'armv7k']
   end
 
   def self.tvos
-    OSPlatform.new 'tvos', 'appletvos*', ['arm64']
+    OSPlatform.new :tvos, 'appletvos*', ['arm64']
   end
 
   private 
@@ -337,9 +337,9 @@ class Installer
 
     loggs "\n#### Unsupported Libraries ####\n#{pod_names_to_remove}\n"
 
-    targets_to_remove = pods_project.targets.filter do |target| pod_names_to_remove.include?(target.module_name) end  # AbstractTarget
-    pods_targets = pods_project.targets.filter do |target| target.name.start_with? "Pods-" end   # AbstractTarget
-    targets_to_keep = pods_project.targets.filter do |target| !targets_to_remove.include?(target) && !pods_targets.include?(target) end   # AbstractTarget
+    targets_to_remove = pods_project.targets.filter do |target| pod_names_to_remove.include?(target.module_name) end.filter do |target| target.platform_name == OSPlatform.ios.name end # AbstractTarget
+    pods_targets = pods_project.targets.filter do |target| target.name.start_with? "Pods-" end.filter do |target| target.platform_name == OSPlatform.ios.name end   # AbstractTarget
+    targets_to_keep = pods_project.targets.filter do |target| !targets_to_remove.include?(target) && !pods_targets.include?(target) end.filter do |target| target.platform_name == OSPlatform.ios.name end   # AbstractTarget
 
     ######  Determine which dependencies should be removed ###### 
     dependencies_to_keep = targets_to_keep.reduce([]) do |dependencies, target| dependencies + target.other_linker_flags_dependencies end    
@@ -367,7 +367,7 @@ class Installer
 
     ###### OTHER LINKER FLAGS -> to iphone* ###### 
     loggs "#### Flagging unsupported libraries ####"
-    pods_project.targets.each do |target| target.flag_libraries unsupported_links, OSPlatform.ios end
+    pods_project.targets.filter do |target| target.platform_name == OSPlatform.ios.name end.each do |target| target.flag_libraries unsupported_links, OSPlatform.ios end
 
     ###### BUILD_PHASES AND DEPENDENCIES -> PLATFORM_FILTER 'ios' ###### 
     loggs "\n#### Filtering build phases ####"
