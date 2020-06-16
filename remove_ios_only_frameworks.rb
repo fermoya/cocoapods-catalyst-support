@@ -133,7 +133,7 @@ class PodTarget
 
   #build_settings[:debug].other_ldflags
   def module_name
-    string = name.clone.gsub! /-iOS[0-9]+(\.[0-9])+$/, ''
+    string = name.clone.gsub! /-(iOS[0-9]+(\.[0-9])+|library|framework)$/, ''
     return string.nil? ? name : string
   end
 
@@ -165,7 +165,7 @@ end
 
 class PBXTargetDependency
   def module_name
-    string = name.clone.gsub! /-iOS[0-9]+(\.[0-9])+$/, ''
+    string = name.clone.gsub! /-(iOS[0-9]+(\.[0-9])+|library|framework)$/, ''
     return string.nil? ? name : string
   end
 end
@@ -173,7 +173,7 @@ end
 class AbstractTarget
 
   def module_name
-    string = name.clone.gsub! /-iOS[0-9]+(\.[0-9])+$/, ''
+    string = name.clone.gsub! /-(iOS[0-9]+(\.[0-9])+|library|framework)$/, ''
     return string.nil? ? name : string
   end
 
@@ -225,6 +225,10 @@ class AbstractTarget
     
     if other_ldflags.nil? 
       return [] 
+    end
+
+    if other_ldflags.class == String
+      other_ldflags = other_ldflags.split ' '
     end
 
     libraries = other_ldflags.filter do |flag| flag.start_with? '-l' end.map do |flag| flag.gsub! /(["|\-l]*)/, '' end.map do |name| PodDependency.newLibrary name end
