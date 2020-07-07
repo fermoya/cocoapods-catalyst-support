@@ -138,7 +138,9 @@ class PodTarget
   end
 
   def resources 
-    return file_accessors.flat_map do |accessor| accessor.resources end.map do |path| "#{path.basename}" end
+    resources = file_accessors.flat_map do |accessor| accessor.resources end.map do |path| "#{path.basename}" end
+    bundles = file_accessors.flat_map do |accessor| accessor.resource_bundles end.flat_map do |dic| dic.keys end.map do |s| s + ".bundle" end
+    return resources + bundles
   end
   
   def vendor_products
@@ -323,8 +325,9 @@ class Installer
   def configure_support_catalyst
 
     ###### Variable definition ###### 
-    all_pods = podfile.target_definitions.flat_map do |key, value| value.dependencies.map do |d| d.name end end.to_set.to_a.map do |name| name.sub('/', '') end
-    pod_names_to_remove = (defined? podfile.catalyst_unsupported_pods) ? podfile.catalyst_unsupported_pods.map do |name| name.sub('/', '') end : []
+    all_pods = podfile.dependencies.flat_map do |d| [d.name, d.to_root_dependency.name] end.to_set.to_a.map do |s| s.sub('/', '') end
+    pod_names_to_remove = (defined? podfile.catalyst_unsupported_pods) ? podfile.catalyst_unsupported_pods : []
+    pod_names_to_remove = podfile.dependencies.filter do |d| pod_names_to_remove.include? d.name end.flat_map do |d| [d.name, d.to_root_dependency.name] end.map do |s| s.sub('/', '') end
     pod_names_to_keep = all_pods.filter do |name| !pod_names_to_remove.include? name end
     configurations = (defined? podfile.release_build_configurations) ? podfile.release_build_configurations : nil
     $verbose = (defined? podfile.debug) ? podfile.debug : $verbose
