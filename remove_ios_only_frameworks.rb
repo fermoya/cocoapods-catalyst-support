@@ -82,19 +82,25 @@ class PBXNativeTarget
 
     script = File.read(script_path)
     snippets = script.scan(/if \[\[ \"\$CONFIGURATION\" [\S\s]*?(?=fi\n)fi/)
-    condition = architectures.map do |arch| "[ \"$ARCHS\" != \"#{arch}\" ]" end.reduce("") do |total, piece| total.empty? ? piece : total + " || " + piece end
+    archs_condition = architectures.map do |arch| "[ \"$ARCHS\" != \"#{arch}\" ]" end.reduce("") do |total, piece| total.empty? ? piece : total + " || " + piece end
+    file_condition_format = 'if [ test -f "\$%s" ]; then'
     changed = false
     
-    snippets.filter do |snippet|
-      configurations.map do |string| snippet.include? string end.reduce(false) do |total, condition| total = total || condition end
-    end.each do |snippet|
+    snippets.each do |snippet|
       new_snippet = snippet.clone
+      should_uninstall = configurations.map do |string| snippet.include? string end.reduce(false) do |total, condition| total = total || condition end
       keys.each do |key|
         lines_to_replace = snippet.filter_lines do |line| line.include? "#{key}" end.to_set.to_a
         unless lines_to_replace.empty?
           changed = true
           lines_to_replace.each do |line|
-            new_snippet.gsub! line, "\tif #{condition}; then \n\t#{line}\tfi\n"
+            if should_uninstall
+              new_snippet.gsub! line, "\tif #{archs_condition}; then \n\t#{line}\tfi\n"
+            elsif file_name.include? 'resources'
+              path = line.scan(/[^(install_resource| |")].*[^*("|\n)]/).first
+              file_condition = file_condition_format % path
+              new_snippet.gsub! line, "\t#{file_condition} \n\t#{line}\tfi\n"
+            end
           end
         end
       end
