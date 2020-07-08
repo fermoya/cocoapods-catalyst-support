@@ -1,4 +1,6 @@
 # CatalystPodSupport
+## Requirements
+* [Ruby 2.6.0+](https://www.ruby-lang.org/en/downloads/)
 ## Who's this for?
 If you're using _CocoaPods_ and your App supports _macCatalyst_, you might have run into this error:
 ```
