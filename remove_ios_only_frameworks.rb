@@ -49,15 +49,15 @@ end
 class PBXNativeTarget
 
   ###### STEP 4 ######
-  # In "Pods-" targets, modify "*frameworks.sh" to not install unsupported frameworks for platform architectures
+  # In "Pods-" targets, modify "*frameworks.sh" to not install unsupported frameworks for SDK
   def uninstall_frameworks frameworks, platform, configurations
-    uninstall frameworks, "#{name}-frameworks.sh", platform.architectures, configurations
+    uninstall frameworks, "#{name}-frameworks.sh", platform.sdk_root, configurations
   end
 
   ###### STEP 5 ######
-  # In "Pods-" targets, modify "*resources.sh" to not install unsupported frameworks for platform architectures
+  # In "Pods-" targets, modify "*resources.sh" to not install unsupported resources for SDK
   def uninstall_resources resources, platform, configurations
-    uninstall resources, "#{name}-resources.sh", platform.architectures, configurations
+    uninstall resources, "#{name}-resources.sh", platform.sdk_root, configurations
   end
 
   def support_files_folder
@@ -65,7 +65,7 @@ class PBXNativeTarget
   end
 
   @private
-  def uninstall keys, file_name, architectures, configurations=nil
+  def uninstall keys, file_name, sdk_root, configurations=nil
     configurations ||= build_configurations.filter do |b| !b.debug? end.map do |b| b.name end
     keys = keys.to_set.to_a
     loggs "\t\t\tUninstalling for configurations: #{configurations}"
@@ -82,7 +82,7 @@ class PBXNativeTarget
 
     script = File.read(script_path)
     snippets = script.scan(/if \[\[ \"\$CONFIGURATION\" [\S\s]*?(?=fi\n)fi/)
-    archs_condition = architectures.map do |arch| "[ \"$ARCHS\" != \"#{arch}\" ]" end.reduce("") do |total, piece| total.empty? ? piece : total + " || " + piece end
+    archs_condition = "[[ \"$SDKROOT\" != *\"#{sdk_root}\"* ]]"
     file_condition_format = 'if [ test -f "\$%s" ]; then'
     changed = false
     
@@ -297,29 +297,29 @@ end
 class OSPlatform
   attr_reader :sdk
   attr_reader :name
-  attr_reader :architectures
+  attr_reader :sdk_root
 
   def self.ios
-    OSPlatform.new :ios, 'iphone*', ['arm64', 'armv7s', 'armv7']
+    OSPlatform.new :ios, 'iphone*', 'iPhoneOS'
   end
 
   def self.macos
-    OSPlatform.new :macos, 'macosx*', ['x86_64']
+    OSPlatform.new :macos, 'macosx*', 'MacOS'
   end
 
-  def self.wtachos
-    OSPlatform.new :watchos, 'watchos*', ['arm64_32', 'armv7k']
+  def self.watchos
+    OSPlatform.new :watchos, 'watchos*', 'WatchOS'
   end
 
   def self.tvos
-    OSPlatform.new :tvos, 'appletvos*', ['arm64']
+    OSPlatform.new :tvos, 'appletvos*', 'AppleTVOS'
   end
 
   private 
-  def initialize(name, sdk, architectures)
+  def initialize(name, sdk, sdk_root)
     @name = name
     @sdk = sdk
-    @architectures = architectures
+    @sdk_root = sdk_root
   end
 
 end
