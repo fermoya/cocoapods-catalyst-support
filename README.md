@@ -77,7 +77,7 @@ end
 ## Customization
 
 ### Select build configurations to process for Store upload
-By default, the script will uninstall resources and frameworks not compiled for _x86_64_ in all build configurations that have `DEBUG=1` in the preprocessor macros, a.k.a. _GCC_PREPROCESSOR_DEFINITIONS_. This will prevent errors from the App Store. It basically skips embedding resources and frameworks that shouldn't be included in the final archive.
+By default, the script will uninstall resources and frameworks not compiled for _x86_64_ in all build configurations that do not have `DEBUG=1` in the preprocessor macros, a.k.a. _GCC_PREPROCESSOR_DEFINITIONS_. This will prevent errors from the App Store. It basically skips embedding resources and frameworks that shouldn't be included in the final archive.
 
 If you use any configuration to debug that doesn't have this macro `DEBUG=1` you might run into issues when debugging in simulators. If so, please add this to your _Podfile_:
 
