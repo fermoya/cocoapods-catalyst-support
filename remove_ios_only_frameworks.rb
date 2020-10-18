@@ -4,7 +4,7 @@
 # files in native targets build phases, filter dependencies and make sure the unsupported frameworks along with their
 # their bundle resources are not included in the final archive. For that, we use `platform_filter` to specify 'ios' and
 # 'OTHER_LDFLAGS[sdk=iphone*]' to link those libraries for iPhone and iPad. Besides, we modify "*frameworks.sh" and 
-# "*resrouces.sh" to skip installation for architecture x86_64.
+# "*resrouces.sh" to skip installation for sdk MacOS.
 #
 # *Notice*: 'sdk=iphone*' excludes macOS, even though Catalyst is compiled with iOS SDK.
 #
@@ -50,14 +50,14 @@ class PBXNativeTarget
 
   ###### STEP 4 ######
   # In "Pods-" targets, modify "*frameworks.sh" to not install unsupported frameworks for SDK
-  def uninstall_frameworks frameworks, platform, configurations
-    uninstall frameworks, "#{name}-frameworks.sh", platform.sdk_root, configurations
+  def uninstall_frameworks frameworks, platform
+    uninstall frameworks, "#{name}-frameworks.sh", platform.sdk_root
   end
 
   ###### STEP 5 ######
   # In "Pods-" targets, modify "*resources.sh" to not install unsupported resources for SDK
-  def uninstall_resources resources, platform, configurations
-    uninstall resources, "#{name}-resources.sh", platform.sdk_root, configurations
+  def uninstall_resources resources, platform
+    uninstall resources, "#{name}-resources.sh", platform.sdk_root
   end
 
   def support_files_folder
@@ -65,8 +65,8 @@ class PBXNativeTarget
   end
 
   @private
-  def uninstall keys, file_name, sdk_root, configurations=nil
-    configurations ||= build_configurations.filter do |b| !b.debug? end.map do |b| b.name end
+  def uninstall keys, file_name, sdk_root
+    configurations = build_configurations.map do |b| b.name end
     keys = keys.to_set.to_a
     loggs "\t\t\tUninstalling for configurations: #{configurations}"
     if support_files_folder.nil?
@@ -83,7 +83,7 @@ class PBXNativeTarget
     script = File.read(script_path)
     snippets = script.scan(/if \[\[ \"\$CONFIGURATION\" [\S\s]*?(?=fi\n)fi/)
     archs_condition = "[[ \"$SDKROOT\" != *\"#{sdk_root}\"* ]]"
-    file_condition_format = 'if [ test -f "\$%s" ]; then'
+    file_condition_format = 'if [ -d "%s" ]; then'
     changed = false
     
     snippets.each do |snippet|
@@ -335,7 +335,6 @@ class Installer
     pod_names_to_remove = (defined? podfile.catalyst_unsupported_pods) ? podfile.catalyst_unsupported_pods : []
     pod_names_to_remove = podfile.dependencies.filter do |d| pod_names_to_remove.include? d.name end.flat_map do |d| [d.name, d.to_root_dependency.name] end.map do |s| s.sub('/', '') end
     pod_names_to_keep = all_pods.filter do |name| !pod_names_to_remove.include? name end
-    configurations = (defined? podfile.release_build_configurations) ? podfile.release_build_configurations : nil
     $verbose = (defined? podfile.debug) ? podfile.debug : $verbose
 
     pod_names_to_keep = recursive_dependencies(pod_names_to_keep)
@@ -396,15 +395,15 @@ class Installer
       target.add_platform_filter_to_dependencies OSPlatform.ios 
     end
 
-    ###### FRAMEWORKS AND RESOURCES SCRIPT -> if [ "$ARCHS" != "x86_64" ]; then #######   
+    ###### FRAMEWORKS AND RESOURCES SCRIPT -> if [ "$SDKROOT" != "MacOS" ]; then #######   
     loggs "\n#### Changing frameworks and resources script ####"
     pods_targets.each do |target|
       loggs "\tTarget: #{target.name}"
       loggs "\t\t-Uninstalling frameworks"
-      target.uninstall_frameworks frameworks_to_uninstall, OSPlatform.macos, configurations
+      target.uninstall_frameworks frameworks_to_uninstall, OSPlatform.macos
 
       loggs "\t\t-Uninstalling resources"
-      target.uninstall_resources resources_to_uninstall, OSPlatform.macos, configurations
+      target.uninstall_resources resources_to_uninstall, OSPlatform.macos
     end
   end
 

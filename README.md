@@ -24,7 +24,7 @@ ERROR ITMS-90276: "Missing Bundle Identifier. The application bundle contains a 
 This script are meant to solve this issue so that your project compiles as usual before supporting _macCatalyst_.
 
 ## What does this script NOT DO?
-It doesn't "magically" fix the pod. If the pod isn't compiled for _x86_64_, then there's nothing that will make it compile for this architecture but the pod's author supporting _macCatalyst_.
+It doesn't "magically" fix the pod. If the pod isn't compiled for sdk MacOS, then there's nothing that will make it compile for this architecture but the pod's author supporting _macCatalyst_.
 
 ## What does this script DO?
 It configures your pods project so that these "unsupported pods" are not linked or compiled when building for _macOS_. You'll still need to use the precompiler and remove features from your _macCatalyst_ App:
@@ -75,19 +75,6 @@ end
 **NOTE**: You should use the name `catalyst_unsupported_pods` as the script expects this keyword.
 
 ## Customization
-
-### Select build configurations to process for Store upload
-By default, the script will uninstall resources and frameworks not compiled for _x86_64_ in all build configurations that do not have `DEBUG=1` in the preprocessor macros, a.k.a. _GCC_PREPROCESSOR_DEFINITIONS_. This will prevent errors from the App Store. It basically skips embedding resources and frameworks that shouldn't be included in the final archive.
-
-If you use any configuration to debug that doesn't have this macro `DEBUG=1` you might run into issues when debugging in simulators. If so, please add this to your _Podfile_:
-
-```ruby
-def release_build_configurations
-  ['Release-Store']
-end
-```
-
-This will define the name of those configurations that required this extra process in order to be uploaded to the App Store.
 
 ### Logs
 If you want to see some logging to understand what's happening, add in your _Podfile_:
