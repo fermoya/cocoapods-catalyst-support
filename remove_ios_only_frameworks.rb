@@ -156,7 +156,7 @@ class PodTarget
     end.map do |s|
       name = "#{s}"
       if name.include? "framework"
-        PodDependency.newFramework name.sub(".framework", "")
+        PodDependency.newFramework name.sub(".framework", "").sub(".xcframework", "")
       else
         PodDependency.newLibrary name.sub("lib", "").sub(".a", "")
       end
@@ -360,7 +360,7 @@ class Installer
     ###### CATALYST NOT SUPPORTED LINKS ###### 
     unsupported_links = dependencies_to_remove.map do |d| d.link end.to_set.to_a
     
-    loggs "#### Unsupported dependencies ####\n"
+    loggs "\n#### Unsupported dependencies ####\n"
     loggs "#{dependencies_to_remove.map do |d| d.name end.to_set.to_a }\n\n"
 
     ###### CATALYST NOT SUPPORTED FRAMEWORKS AND RESOURCES
