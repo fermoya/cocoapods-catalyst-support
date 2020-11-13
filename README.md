@@ -1,6 +1,8 @@
 # CatalystPodSupport
+
 ## Requirements
 * [Ruby 2.6.0+](https://www.ruby-lang.org/en/downloads/)
+
 ## Who's this for?
 If you're using _CocoaPods_ and your App supports _macCatalyst_, you might have run into this error:
 ```
@@ -84,4 +86,14 @@ def debug
 end
 ```
 
+## Support Open Source
 
+If you love this script, understand all the effort it takes to maintain it and would like to  support me, you can buy me a coffee by following this [link](https://www.buymeacoffee.com/fermoya):
+
+<a href="https://www.buymeacoffee.com/fermoya" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
+
+You can also sponsor me by hitting the [_GitHub Sponsor_](https://github.com/sponsors/fermoya) button. All help is very much appreciated.
+
+## License  
+
+`CatalystPodSupport` is available under the MIT license. See the [LICENSE](/LICENSE) file for more info.
