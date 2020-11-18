@@ -42,8 +42,30 @@ These are the steps to follow:
 
 - Identify which pods don't compile for _macOS_ architectures
 - Download this [ruby file](/remove_ios_only_frameworks.rb) and place it in the same folder as your _Podfile_.
-- Modify your _Podfile_ like:
+- Define an array `catalyst_unsupported_pods` and add those pods you want to exclude. Don't add their dependencies as they will be automatically excluded if needed:
+```ruby
+target 'My target' do   
+  use_frameworks! 
+  
+  pod 'Firebase/Crashlytics' 
+  ...
+end
 
+def catalyst_unsupported_pods
+  [
+    "Firebase/Crashlytics"
+    ...
+  ]
+end
+```
+- Use `post_install` to run the script:
+```ruby
+post_install do |installer|   
+  installer.configure_support_catalyst
+end
+```
+
+Your `Podfile` should look similar to this:
 ```ruby
 # Inside your Podfile
 
@@ -53,22 +75,26 @@ load 'remove_ios_only_frameworks.rb'
 ######  YOUR TARGETS  ######
 
 target 'My target' do   
-  use_frameworks!   
+  use_frameworks! 
+  
   # Install your pods   
   pod 'FBSDKCoreKit'
-  pod 'Crashlytics' 
+  pod 'Firebase/Crashlytics' 
   ...
 end
 
-# 2. Define which libraries should be configured
+# 2. Define which libraries should be excluded for macCatalyst
 def catalyst_unsupported_pods
   [
-    "Crashlytics", "Fabric", "Firebase/Analytics"
-    "Branch", "FBSDKCoreKit", "ZendeskChatSDK",
-    ... # more libraries
+    "Firebase/Crashlytics", 
+    "Firebase/Analytics",
+    "Branch", 
+    "FBSDKCoreKit",
+    ...
   ]
 end
 
+# 3. Run the script
 post_install do |installer|   
   installer.configure_support_catalyst
 end
@@ -85,6 +111,17 @@ def debug
   true
 end
 ```
+
+## Troubleshooting
+* Make sure you're using the last version of the script
+* Add [logs](#logs) and check if the library is being excluded
+* Verify you're excluding the same dependency. Installing `pod 'Firebase/Analytics'` and excluding `'FirebaseAnalytics'` won't work. Make sure the same key is used
+* Ensure you're using `Ruby 2.6.0` or higher and you're using the last version of `Cocoapods`
+* Open an issue and provide your:
+    * Ruby version
+    * Cocoapods version
+    * Xcode version
+    * Podfile
 
 ## Support Open Source
 
