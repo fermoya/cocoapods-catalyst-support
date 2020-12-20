@@ -139,7 +139,7 @@ class PodTarget
 
   #build_settings[:debug].other_ldflags
   def module_name
-    string = name.clone.gsub! /-(iOS[0-9]+(\.[0-9])+|library|framework)$/, ''
+    string = name.clone.gsub! /(-(iOS([0-9]+(\.[0-9])?)*|library|framework))*$/, ''
     return string.nil? ? name : string
   end
 
@@ -173,7 +173,7 @@ end
 
 class PBXTargetDependency
   def module_name
-    string = name.clone.gsub! /-(iOS[0-9]+(\.[0-9])+|library|framework)$/, ''
+    string = name.clone.gsub! /(-(iOS([0-9]+(\.[0-9])?)*|library|framework))*$/, ''
     return string.nil? ? name : string
   end
 end
@@ -181,7 +181,7 @@ end
 class AbstractTarget
 
   def module_name
-    string = name.clone.gsub! /-(iOS[0-9]+(\.[0-9])+|library|framework)$/, ''
+    string = name.clone.gsub! /(-(iOS([0-9]+(\.[0-9])?)*|library|framework))*$/, ''
     return string.nil? ? name : string
   end
 
