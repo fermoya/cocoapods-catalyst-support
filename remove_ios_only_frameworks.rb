@@ -121,16 +121,16 @@ class PBXNativeTarget
   # - Headers
   def add_platform_filter_to_build_phases platform
     loggs "\t\t- Filtering resources"
-    resources_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.name.to_s end
+    resources_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.filter end
     
     loggs "\t\t- Filtering compile sources"
-    source_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.name.to_s end
+    source_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.filter end
     
     loggs "\t\t- Filtering frameworks"
-    frameworks_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.name.to_s end
+    frameworks_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.filter end
     
     loggs "\t\t- Filtering headers"
-    headers_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.name.to_s end
+    headers_build_phase.files.to_a.map do |build_file| build_file.platform_filter = platform.filter end
   end
 
 end
@@ -210,7 +210,7 @@ class AbstractTarget
           xcconfig.gsub!(framework, '')
           unless xcconfig.include? "OTHER_LDFLAGS[sdk=#{platform.sdk}]"
             changed = true
-            xcconfig += "OTHER_LDFLAGS[sdk=#{platform.sdk}] = $(inherited) -ObjC "
+            xcconfig += "\nOTHER_LDFLAGS[sdk=#{platform.sdk}] = $(inherited) -ObjC "
           end
           xcconfig += framework + ' '
         end
@@ -295,31 +295,33 @@ class PodDependency
 end
 
 class OSPlatform
-  attr_reader :sdk
   attr_reader :name
+  attr_reader :sdk
   attr_reader :sdk_root
+  attr_reader :filter
 
   def self.ios
-    OSPlatform.new :ios, 'iphone*', 'iPhoneOS'
+    OSPlatform.new :ios, 'iphone*', 'iPhoneOS', 'ios'
   end
 
   def self.macos
-    OSPlatform.new :macos, 'macosx*', 'MacOS'
+    OSPlatform.new :macos, 'macosx*', 'MacOS', 'maccatalyst'
   end
 
   def self.watchos
-    OSPlatform.new :watchos, 'watchos*', 'WatchOS'
+    OSPlatform.new :watchos, 'watchos*', 'WatchOS', 'watchos'
   end
 
   def self.tvos
-    OSPlatform.new :tvos, 'appletvos*', 'AppleTVOS'
+    OSPlatform.new :tvos, 'appletvos*', 'AppleTVOS', 'tvos'
   end
 
   private 
-  def initialize(name, sdk, sdk_root)
+  def initialize(name, sdk, sdk_root, filter)
     @name = name
     @sdk = sdk
     @sdk_root = sdk_root
+    @filter = filter
   end
 
 end
@@ -329,10 +331,23 @@ end
 class Installer
 
   def configure_support_catalyst
+    catalyst_pods_to_remove = (defined? podfile.catalyst_unsupported_pods) ? podfile.catalyst_unsupported_pods : []
+    if !catalyst_pods_to_remove.empty? 
+      remove_dependencies catalyst_pods_to_remove, OSPlatform.macos, OSPlatform.ios
+    end
+
+    ios_pods_to_remove = (defined? podfile.catalyst_only_pods) ? podfile.catalyst_only_pods : []
+    if !ios_pods_to_remove.empty? 
+      remove_dependencies ios_pods_to_remove, OSPlatform.ios, OSPlatform.macos
+    end
+  end
+
+  def remove_dependencies pod_names_to_remove, remove_platform, keep_platform
+
+    loggs "\n#### Configuring #{remove_platform.name} dependencies ####\n"
 
     ###### Variable definition ###### 
     all_pods = podfile.dependencies.flat_map do |d| [d.name, d.to_root_dependency.name] end.to_set.to_a.map do |s| s.sub('/', '') end
-    pod_names_to_remove = (defined? podfile.catalyst_unsupported_pods) ? podfile.catalyst_unsupported_pods : []
     pod_names_to_remove = podfile.dependencies.filter do |d| pod_names_to_remove.include? d.name end.flat_map do |d| [d.name, d.to_root_dependency.name] end.map do |s| s.sub('/', '') end
     pod_names_to_keep = all_pods.filter do |name| !pod_names_to_remove.include? name end
     $verbose = (defined? podfile.debug) ? podfile.debug : $verbose
@@ -375,7 +390,7 @@ class Installer
 
     ###### OTHER LINKER FLAGS -> to iphone* ###### 
     loggs "#### Flagging unsupported libraries ####"
-    pods_project.targets.filter do |target| target.platform_name == OSPlatform.ios.name end.each do |target| target.flag_libraries unsupported_links, OSPlatform.ios end
+    pods_project.targets.filter do |target| target.platform_name == OSPlatform.ios.name end.each do |target| target.flag_libraries unsupported_links, keep_platform end
 
     ###### BUILD_PHASES AND DEPENDENCIES -> PLATFORM_FILTER 'ios' ###### 
     loggs "\n#### Filtering build phases ####"
@@ -383,8 +398,8 @@ class Installer
       pods_project.native_targets.include? target
     end.each do |target| 
       loggs "\tTarget: #{target.name}"
-      target.add_platform_filter_to_build_phases OSPlatform.ios 
-      target.add_platform_filter_to_dependencies OSPlatform.ios
+      target.add_platform_filter_to_build_phases keep_platform
+      target.add_platform_filter_to_dependencies keep_platform
     end
 
     loggs "\n#### Filtering dependencies ####"
@@ -392,7 +407,7 @@ class Installer
       !pods_project.native_targets.include? target
     end.each do |target| 
       loggs "\tTarget: #{target.name}"
-      target.add_platform_filter_to_dependencies OSPlatform.ios 
+      target.add_platform_filter_to_dependencies keep_platform
     end
 
     ###### FRAMEWORKS AND RESOURCES SCRIPT -> if [ "$SDKROOT" != "MacOS" ]; then #######   
@@ -400,10 +415,10 @@ class Installer
     pods_targets.each do |target|
       loggs "\tTarget: #{target.name}"
       loggs "\t\t-Uninstalling frameworks"
-      target.uninstall_frameworks frameworks_to_uninstall, OSPlatform.macos
+      target.uninstall_frameworks frameworks_to_uninstall, remove_platform
 
       loggs "\t\t-Uninstalling resources"
-      target.uninstall_resources resources_to_uninstall, OSPlatform.macos
+      target.uninstall_resources resources_to_uninstall, remove_platform
     end
   end
 
