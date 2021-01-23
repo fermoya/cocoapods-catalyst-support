@@ -102,6 +102,15 @@ end
 
 **NOTE**: You should use the name `catalyst_unsupported_pods` as the script expects this keyword.
 
+Additionally, you can exclude pods from your `iOS` App that would like to use only for your `macCatalyst` App:
+```ruby
+def catalyst_only_pods
+  [
+    'AppCenter/Analytics'
+  ]
+end
+```
+
 ## Customization
 
 ### Logs
