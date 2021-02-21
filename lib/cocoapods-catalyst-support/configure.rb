@@ -22,6 +22,7 @@ module CocoapodsCatalystSupport
       tail += "\n#Add pods to be only used in macCatalyst \ndef catalyst_only_pods\n\t[\n\n\t]\nend\n"
     end
 
+    changed = !(tails.empty? && podfile.include? 'configure_support_catalyst')
     unless podfile.include? "post_install do"
       podfile += tail
       podfile += "\n#Configure your macCatalyst App\npost_install do |installer|\n\tinstaller.configure_support_catalyst\nend\n"
@@ -41,6 +42,11 @@ module CocoapodsCatalystSupport
     unless podfile.nil? 
       File.open('Podfile', "w") { |file| file << podfile }
     end
+
+    if changed 
+      puts 'Done! Checkout your Podfile to start configuring your macCatalyst dependencies'
+    else
+      puts 'It seems your Podfile is ready. Go ahead and start configuring your macCatalyst dependencies'
   end
 
 end

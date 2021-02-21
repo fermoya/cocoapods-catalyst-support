@@ -21,7 +21,7 @@ module Pod
     # @todo Create a PR to add your plugin to CocoaPods/cocoapods.org
     #       in the `plugins.json` file, once your plugin is released.
     #
-    class Support < Command
+    class Catalyst < Command
 
       self.summary = 'Configure Catalyst Support in your Podfile.'
 

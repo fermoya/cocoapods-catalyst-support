@@ -1,1 +1,1 @@
-require 'cocoapods-catalyst-support/command/support'
+require 'cocoapods-catalyst-support/command/catalyst'
