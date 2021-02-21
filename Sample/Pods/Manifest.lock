@@ -1,0 +1,319 @@
+PODS:
+  - Amplitude (7.1.1)
+  - Audiobus (3.0.12)
+  - BNHtmlPdfKit (0.4.2)
+  - CMPopTipView (2.2.0)
+  - ConfettiView-NSHipster (0.1.0)
+  - CorePlot (2.3)
+  - DDExpandableButton (1.1.1)
+  - DeallocationChecker (3.0)
+  - DevContactSDK (1.2.9)
+  - DeviceGuru (7.0.1):
+    - DeviceGuru/DeviceGuru (= 7.0.1)
+  - DeviceGuru/DeviceGuru (7.0.1):
+    - DeviceGuru/Resources
+  - DeviceGuru/Resources (7.0.1)
+  - DLPDFRenderer (1.1.2)
+  - EDColor (1.0.1)
+  - FFGlobalAlertController (1.0.2)
+  - Finch (1.0.3)
+  - Firebase/Analytics (6.27.0):
+    - Firebase/Core
+  - Firebase/Core (6.27.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 6.6.1)
+  - Firebase/CoreOnly (6.27.0):
+    - FirebaseCore (= 6.8.0)
+  - Firebase/Crashlytics (6.27.0):
+    - Firebase/CoreOnly
+    - FirebaseCrashlytics (~> 4.2.0)
+  - FirebaseAnalytics (6.6.1):
+    - FirebaseCore (~> 6.8)
+    - FirebaseInstallations (~> 1.4)
+    - GoogleAppMeasurement (= 6.6.1)
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 1.30905.0)
+  - FirebaseCore (6.8.0):
+    - FirebaseCoreDiagnostics (~> 1.3)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/Logger (~> 6.5)
+  - FirebaseCoreDiagnostics (1.4.0):
+    - GoogleDataTransportCCTSupport (~> 3.1)
+    - GoogleUtilities/Environment (~> 6.5)
+    - GoogleUtilities/Logger (~> 6.5)
+    - nanopb (~> 1.30905.0)
+  - FirebaseCrashlytics (4.2.0):
+    - FirebaseCore (~> 6.8)
+    - FirebaseInstallations (~> 1.1)
+    - GoogleDataTransport (~> 6.1)
+    - GoogleDataTransportCCTSupport (~> 3.1)
+    - nanopb (~> 1.30905.0)
+    - PromisesObjC (~> 1.2)
+  - FirebaseInstallations (1.4.0):
+    - FirebaseCore (~> 6.8)
+    - GoogleUtilities/Environment (~> 6.6)
+    - GoogleUtilities/UserDefaults (~> 6.6)
+    - PromisesObjC (~> 1.2)
+  - FittableFontLabel (3.0.0)
+  - FLAnimatedImage (1.0.15)
+  - FontAwesomeKit (2.2.1):
+    - FontAwesomeKit/Core (= 2.2.1)
+    - FontAwesomeKit/FontAwesome (= 2.2.1)
+    - FontAwesomeKit/FoundationIcons (= 2.2.1)
+    - FontAwesomeKit/IonIcons (= 2.2.1)
+    - FontAwesomeKit/Material (= 2.2.1)
+    - FontAwesomeKit/Octicons (= 2.2.1)
+    - FontAwesomeKit/Zocial (= 2.2.1)
+  - FontAwesomeKit/Core (2.2.1)
+  - FontAwesomeKit/FontAwesome (2.2.1):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/FoundationIcons (2.2.1):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/IonIcons (2.2.1):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/Material (2.2.1):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/Octicons (2.2.1):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/Zocial (2.2.1):
+    - FontAwesomeKit/Core
+  - FSCalendar (2.8.2)
+  - FTPopOverMenu (1.3.6)
+  - FTPopOverMenu_Swift (0.3.3)
+  - GoogleAppMeasurement (6.6.1):
+    - GoogleUtilities/AppDelegateSwizzler (~> 6.0)
+    - GoogleUtilities/MethodSwizzler (~> 6.0)
+    - GoogleUtilities/Network (~> 6.0)
+    - "GoogleUtilities/NSData+zlib (~> 6.0)"
+    - nanopb (~> 1.30905.0)
+  - GoogleDataTransport (6.2.1)
+  - GoogleDataTransportCCTSupport (3.2.0):
+    - GoogleDataTransport (~> 6.1)
+    - nanopb (~> 1.30905.0)
+  - GoogleUtilities/AppDelegateSwizzler (6.6.0):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (6.6.0):
+    - PromisesObjC (~> 1.2)
+  - GoogleUtilities/Logger (6.6.0):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (6.6.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (6.6.0):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (6.6.0)"
+  - GoogleUtilities/Reachability (6.6.0):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (6.6.0):
+    - GoogleUtilities/Logger
+  - JMHoledView (0.2.1)
+  - KxMenu (1)
+  - LGAlertView (2.4.0)
+  - MarqueeLabel (4.0.5)
+  - Masonry (1.1.0)
+  - MBCircularProgressBar (0.3.5)
+  - MBProgressHUD (1.2.0)
+  - MIKMIDI (1.7.1)
+  - MZTimerLabel (0.5.4)
+  - nanopb (1.30905.0):
+    - nanopb/decode (= 1.30905.0)
+    - nanopb/encode (= 1.30905.0)
+  - nanopb/decode (1.30905.0)
+  - nanopb/encode (1.30905.0)
+  - NotificationBannerSwift (3.0.6):
+    - MarqueeLabel (~> 4.0.5)
+    - SnapKit (~> 5.0.1)
+  - OBSlider (1.1.1)
+  - PDColorPicker (0.8.3)
+  - PromisesObjC (1.2.9)
+  - Reachability (3.2)
+  - RZViewActions (0.2.1)
+  - ShowTime (2.5.2)
+  - SnapKit (5.0.1)
+  - SwiftKeychainWrapper (4.0.1)
+  - SwiftSpinner (2.0.0)
+  - SwipeCellKit (2.7.1)
+  - ViewAnimator (3.0.2)
+  - WEPopover (2.5.3)
+  - WhatsNewKit (1.3.7)
+  - XCDYouTubeKit (2.15.2)
+
+DEPENDENCIES:
+  - Amplitude (~> 7.1.0)
+  - Audiobus (= 3.0.12)
+  - BNHtmlPdfKit (~> 0.4.2)
+  - CMPopTipView (~> 2.2.0)
+  - ConfettiView-NSHipster
+  - CorePlot (~> 2.3)
+  - DDExpandableButton (~> 1.1.1)
+  - DeallocationChecker
+  - DevContactSDK
+  - DeviceGuru
+  - DLPDFRenderer (~> 1.1.2)
+  - EDColor (~> 1.0.1)
+  - FFGlobalAlertController
+  - Finch (~> 1.0.3)
+  - Firebase/Analytics
+  - Firebase/Crashlytics
+  - FittableFontLabel
+  - FLAnimatedImage (~> 1.0.12)
+  - FontAwesomeKit (from `https://github.com/PrideChung/FontAwesomeKit.git`)
+  - FSCalendar
+  - FTPopOverMenu (~> 1.3.2)
+  - FTPopOverMenu_Swift (~> 0.3.3)
+  - JMHoledView (~> 0.2.1)
+  - KxMenu (~> 1)
+  - LGAlertView (~> 2.4.0)
+  - MarqueeLabel
+  - Masonry (~> 1.1.0)
+  - MBCircularProgressBar (~> 0.3.5)
+  - MBProgressHUD (~> 1.2.0)
+  - MIKMIDI (~> 1.7.0)
+  - MZTimerLabel (~> 0.5.4)
+  - NotificationBannerSwift (~> 3.0.0)
+  - OBSlider (~> 1.1.1)
+  - PDColorPicker
+  - Reachability (~> 3.2)
+  - RZViewActions (~> 0.2.0)
+  - ShowTime
+  - SnapKit (~> 5.0.0)
+  - SwiftKeychainWrapper
+  - SwiftSpinner (~> 2.0.0)
+  - SwipeCellKit
+  - ViewAnimator
+  - WEPopover (~> 2.5.3)
+  - WhatsNewKit
+  - XCDYouTubeKit (~> 2.8)
+
+SPEC REPOS:
+  trunk:
+    - Amplitude
+    - Audiobus
+    - BNHtmlPdfKit
+    - CMPopTipView
+    - ConfettiView-NSHipster
+    - CorePlot
+    - DDExpandableButton
+    - DeallocationChecker
+    - DevContactSDK
+    - DeviceGuru
+    - DLPDFRenderer
+    - EDColor
+    - FFGlobalAlertController
+    - Finch
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseCoreDiagnostics
+    - FirebaseCrashlytics
+    - FirebaseInstallations
+    - FittableFontLabel
+    - FLAnimatedImage
+    - FSCalendar
+    - FTPopOverMenu
+    - FTPopOverMenu_Swift
+    - GoogleAppMeasurement
+    - GoogleDataTransport
+    - GoogleDataTransportCCTSupport
+    - GoogleUtilities
+    - JMHoledView
+    - KxMenu
+    - LGAlertView
+    - MarqueeLabel
+    - Masonry
+    - MBCircularProgressBar
+    - MBProgressHUD
+    - MIKMIDI
+    - MZTimerLabel
+    - nanopb
+    - NotificationBannerSwift
+    - OBSlider
+    - PDColorPicker
+    - PromisesObjC
+    - Reachability
+    - RZViewActions
+    - ShowTime
+    - SnapKit
+    - SwiftKeychainWrapper
+    - SwiftSpinner
+    - SwipeCellKit
+    - ViewAnimator
+    - WEPopover
+    - WhatsNewKit
+    - XCDYouTubeKit
+
+EXTERNAL SOURCES:
+  FontAwesomeKit:
+    :git: https://github.com/PrideChung/FontAwesomeKit.git
+
+CHECKOUT OPTIONS:
+  FontAwesomeKit:
+    :commit: 41aeffd747eef6c61da5bf71406aaf4e7927b00f
+    :git: https://github.com/PrideChung/FontAwesomeKit.git
+
+SPEC CHECKSUMS:
+  Amplitude: 722d352df11f008571e8ef82faaa905984d06178
+  Audiobus: 561b04318f6706b138a92d55397151edc5c11702
+  BNHtmlPdfKit: f62aeccf09475e491a6ea3ad949e47f49a5c55a5
+  CMPopTipView: a0a88404b9f46a5cfc16ce54bdb1b9bf9acb9aff
+  ConfettiView-NSHipster: 83395e9810b45fcc498ce29c4bcdf172afeffe06
+  CorePlot: 6bfe6d30d215beec3cfd18ee43e434620119bc1e
+  DDExpandableButton: 0e8768eac8b73a45154bd7e470746e6363748765
+  DeallocationChecker: c7525fee070e6ece7b16343eb548bcf16c157393
+  DevContactSDK: dcb739fef8650a4b5135313d24504bce8b36328f
+  DeviceGuru: 73d82f34cddee25d215b35eb4d094b7a44ec187a
+  DLPDFRenderer: a8f3d850c1faacb8985a761831e49a8574ab167e
+  EDColor: 91d127cd67d7c1d3862846fb11ef4b3851151bfa
+  FFGlobalAlertController: 40c66500ae173895085911ba19d79d045bd26742
+  Finch: 96b95b2d01f91a40b546b78c24b3bcfce7cb2b6b
+  Firebase: fc4cbf6f1592636431821ef9a3c557e4dfd9f268
+  FirebaseAnalytics: 0ea640473474f036cabbc2576e20c2d63671c92f
+  FirebaseCore: feda061cb1ee6d8ad4824f4a4a8ffbcfe284f595
+  FirebaseCoreDiagnostics: 4505e4d4009b1d93f605088ee7d7764d5f0d1c84
+  FirebaseCrashlytics: 7d0fa02ea8842cc4b2ab07b0735edafde1ad77d6
+  FirebaseInstallations: 293f567159b6d66d1c990f13bb868066096c94ec
+  FittableFontLabel: 34581be026d89c02eb7be992c163e705b586b86f
+  FLAnimatedImage: dd3db277b17e909ec3c7fd41adfce79b321d960e
+  FontAwesomeKit: 3614979b3dbb0ec3f7fac1bd760b91f66c31db67
+  FSCalendar: e6a2eb9c571bf0719ed797ef807e08426753c241
+  FTPopOverMenu: da4b2df7ae3341478e129a2585542f6e70cd67ec
+  FTPopOverMenu_Swift: 1effa730d18851c604b2937e9f956ea4b9782e4e
+  GoogleAppMeasurement: 2fd5c5a56c069db635c8e7b92d4809a9591d0a69
+  GoogleDataTransport: 9a8a16f79feffc7f42096743de2a7c4815e84020
+  GoogleDataTransportCCTSupport: 489c1265d2c85b68187a83a911913d190012158d
+  GoogleUtilities: 39530bc0ad980530298e9c4af8549e991fd033b1
+  JMHoledView: fe5b140dd053a58ce551f3c7cbd674602d9aca23
+  KxMenu: c025365712f55fa99feb7830fbb7dea0e912be72
+  LGAlertView: 2f5e83dd5cc2537de57d98727650609e86197d1a
+  MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MBCircularProgressBar: 0b795b722a5eb5b0923822f90474e2576a1a7855
+  MBProgressHUD: 3ee5efcc380f6a79a7cc9b363dd669c5e1ae7406
+  MIKMIDI: f53dca2f372e71183ecdd2b35c984c1c2cd11cbc
+  MZTimerLabel: cd9bfb9304540ef2a9e163384fca9c978f0dbf83
+  nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
+  NotificationBannerSwift: 7021be2338f8f29cf424b0aca43da462bf9e2a1a
+  OBSlider: 38853ebbb9cc6978a9b7ddc0d4f525588e8bb294
+  PDColorPicker: 3c9857bb942e2878c150fc890b91fc08f1457967
+  PromisesObjC: b48e0338dbbac2207e611750777895f7a5811b75
+  Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  RZViewActions: 17f9245815ba64be94ff87ea3f00ec64e9664b6e
+  ShowTime: 5cb2c5314da2983cec44f27123a15473cf29306f
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
+  SwiftSpinner: 77d972ab315bdc29b62bbedd128b88986969967e
+  SwipeCellKit: 3972254a826da74609926daf59b08d6c72e619ea
+  ViewAnimator: 16435576cd44fca0b0d63147d5031fd3e91d295a
+  WEPopover: 8763785188621ecbb814c9be9ddabf1a133ddc04
+  WhatsNewKit: c87028c4059dccd113495422801914cc53f6aab0
+  XCDYouTubeKit: b120aced3d8638ffb570c5450cddb5a1dac448c7
+
+PODFILE CHECKSUM: c93c25c377962d37804962e661f6e331ff6935da
+
+COCOAPODS: 1.10.1

@@ -1,0 +1,93 @@
+require 'cocoapods-catalyst-support'
+
+
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+#load "remove_ios_only_frameworks.rb"
+use_frameworks!
+
+abstract_target 'AllTargets' do
+
+  target 'Sample'
+
+  pod "DeallocationChecker"
+  pod 'DeviceGuru'
+  pod 'Amplitude', '~> 7.1.0'
+  pod 'NotificationBannerSwift', '~> 3.0.0'
+  pod 'ConfettiView-NSHipster'
+  pod 'ShowTime'
+  pod 'MarqueeLabel'
+  pod 'Firebase/Crashlytics'
+  pod 'Firebase/Analytics'
+  pod "ViewAnimator"
+  pod 'SwipeCellKit'
+  pod 'SwiftSpinner', '~> 2.0.0'
+  pod 'Finch', '~> 1.0.3'
+  pod 'JMHoledView', '~> 0.2.1'
+  pod 'PDColorPicker'
+  pod 'WhatsNewKit'
+  pod 'FittableFontLabel'
+  pod "FFGlobalAlertController"
+  pod 'SwiftKeychainWrapper'
+  pod 'EDColor', '~> 1.0.1'
+  pod 'FLAnimatedImage', '~> 1.0.12'
+  pod 'CorePlot', '~> 2.3'
+  pod 'MBProgressHUD', '~> 1.2.0'
+  pod 'CMPopTipView', '~> 2.2.0'
+  pod 'FontAwesomeKit', git: 'https://github.com/PrideChung/FontAwesomeKit.git'
+  pod 'Masonry', '~> 1.1.0'
+  pod 'SnapKit', '~> 5.0.0'
+  pod 'RZViewActions', '~> 0.2.0'
+  pod 'KxMenu', '~> 1'
+  pod 'FTPopOverMenu', '~> 1.3.2'
+  pod 'FTPopOverMenu_Swift', '~> 0.3.3'
+  pod 'WEPopover', '~> 2.5.3'
+  pod "XCDYouTubeKit", "~> 2.8"
+  pod 'DDExpandableButton', '~> 1.1.1'
+  pod 'Reachability', '~> 3.2'
+  pod 'MZTimerLabel', '~> 0.5.4'
+  pod 'Audiobus', '3.0.12'
+  pod 'DLPDFRenderer', '~> 1.1.2'
+  pod 'BNHtmlPdfKit', '~> 0.4.2'
+  pod 'DevContactSDK'
+  pod 'LGAlertView', '~> 2.4.0'
+  pod 'OBSlider', '~> 1.1.1'
+  pod 'MBCircularProgressBar', '~> 0.3.5'
+  pod 'FSCalendar'
+  pod 'MIKMIDI', '~> 1.7.0'
+  #  pod 'AirTurnUI', '~> 4'
+
+end
+#Use false for silent mode
+
+
+#Add pods to be excluded from macCatalyst 
+def catalyst_unsupported_pods
+	[
+
+	]
+end
+
+
+
+#Configure your macCatalyst App
+
+#Add pods to be only used in macCatalyst 
+def catalyst_only_pods
+	[
+
+	]
+end
+
+
+
+#Use false for silent mode
+def debug
+	true
+end
+
+
+post_install do |installer|
+	installer.configure_support_catalyst
+end

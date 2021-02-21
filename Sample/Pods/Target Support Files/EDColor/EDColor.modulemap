@@ -1,0 +1,6 @@
+framework module EDColor {
+  umbrella header "EDColor-umbrella.h"
+
+  export *
+  module * { export * }
+}

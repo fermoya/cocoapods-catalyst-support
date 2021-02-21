@@ -1,0 +1,6 @@
+framework module DDExpandableButton {
+  umbrella header "DDExpandableButton-umbrella.h"
+
+  export *
+  module * { export * }
+}

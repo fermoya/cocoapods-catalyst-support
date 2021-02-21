@@ -1,0 +1,6 @@
+framework module FFGlobalAlertController {
+  umbrella header "FFGlobalAlertController-umbrella.h"
+
+  export *
+  module * { export * }
+}

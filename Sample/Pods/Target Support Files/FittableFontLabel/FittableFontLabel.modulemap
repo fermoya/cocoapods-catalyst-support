@@ -1,0 +1,6 @@
+framework module FittableFontLabel {
+  umbrella header "FittableFontLabel-umbrella.h"
+
+  export *
+  module * { export * }
+}

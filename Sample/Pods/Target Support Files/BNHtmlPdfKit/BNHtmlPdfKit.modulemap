@@ -1,0 +1,6 @@
+framework module BNHtmlPdfKit {
+  umbrella header "BNHtmlPdfKit-umbrella.h"
+
+  export *
+  module * { export * }
+}

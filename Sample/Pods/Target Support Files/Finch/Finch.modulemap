@@ -1,0 +1,6 @@
+framework module Finch {
+  umbrella header "Finch-umbrella.h"
+
+  export *
+  module * { export * }
+}

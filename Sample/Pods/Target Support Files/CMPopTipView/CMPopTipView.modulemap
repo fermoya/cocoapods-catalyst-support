@@ -1,0 +1,6 @@
+framework module CMPopTipView {
+  umbrella header "CMPopTipView-umbrella.h"
+
+  export *
+  module * { export * }
+}

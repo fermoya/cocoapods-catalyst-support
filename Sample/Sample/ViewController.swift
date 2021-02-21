@@ -7,6 +7,12 @@
 
 import UIKit
 
+#if !targetEnvironment(macCatalyst)
+import Firebase
+//#else
+//import AppCenter
+#endif
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {

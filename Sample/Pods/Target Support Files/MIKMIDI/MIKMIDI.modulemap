@@ -1,0 +1,6 @@
+framework module MIKMIDI {
+  umbrella header "MIKMIDI-umbrella.h"
+
+  export *
+  module * { export * }
+}

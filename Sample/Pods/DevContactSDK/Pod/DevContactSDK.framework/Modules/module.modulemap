@@ -1,0 +1,6 @@
+framework module DevContactSDK {
+  umbrella header "DevContactSDK.h"
+
+  export *
+  module * { export * }
+}
