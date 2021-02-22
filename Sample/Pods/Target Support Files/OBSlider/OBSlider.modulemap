@@ -1,6 +1,0 @@
-framework module OBSlider {
-  umbrella header "OBSlider-umbrella.h"
-
-  export *
-  module * { export * }
-}

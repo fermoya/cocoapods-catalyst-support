@@ -1,6 +1,0 @@
-framework module JMHoledView {
-  umbrella header "JMHoledView-umbrella.h"
-
-  export *
-  module * { export * }
-}

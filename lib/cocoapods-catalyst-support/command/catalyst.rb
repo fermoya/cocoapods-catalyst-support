@@ -1,7 +1,3 @@
-require 'cocoapods-catalyst-support/configure'
-
-include CocoapodsCatalystSupport
-
 module Pod
   class Command
     # This is an example of a cocoapods plugin adding a top-level subcommand
@@ -22,7 +18,7 @@ module Pod
     #       in the `plugins.json` file, once your plugin is released.
     #
     class Catalyst < Command
-
+    
       self.summary = 'Configure Catalyst Support in your Podfile.'
 
       self.description = <<-DESC
@@ -32,8 +28,9 @@ module Pod
       self.arguments = []
 
       def run
-        configure_podfile
+        UI.puts 'Did you mean `pod catalyst init`?'
       end
+
     end
   end
 end

@@ -350,7 +350,6 @@ class Installer
     all_pods = podfile.dependencies.flat_map do |d| [d.name, d.to_root_dependency.name] end.to_set.to_a.map do |s| s.sub('/', '') end
     pod_names_to_remove = podfile.dependencies.filter do |d| pod_names_to_remove.include? d.name end.flat_map do |d| [d.name, d.to_root_dependency.name] end.map do |s| s.sub('/', '') end
     pod_names_to_keep = all_pods.filter do |name| !pod_names_to_remove.include? name end
-    $verbose = (defined? podfile.debug) ? podfile.debug : $verbose
 
     pod_names_to_keep = recursive_dependencies(pod_names_to_keep)
     pod_targets_to_keep = pod_targets.filter do |pod| pod_names_to_keep.include? pod.module_name end       # PodTarget

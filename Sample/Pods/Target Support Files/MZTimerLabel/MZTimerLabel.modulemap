@@ -1,6 +1,0 @@
-framework module MZTimerLabel {
-  umbrella header "MZTimerLabel-umbrella.h"
-
-  export *
-  module * { export * }
-}

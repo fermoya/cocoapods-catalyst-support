@@ -1,6 +1,0 @@
-framework module RZViewActions {
-  umbrella header "RZViewActions-umbrella.h"
-
-  export *
-  module * { export * }
-}
