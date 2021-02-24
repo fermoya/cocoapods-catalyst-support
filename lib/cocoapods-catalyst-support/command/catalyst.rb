@@ -1,3 +1,5 @@
+require 'colorize'
+
 module Pod
   class Command
     # This is an example of a cocoapods plugin adding a top-level subcommand
@@ -25,10 +27,15 @@ module Pod
         This plugin will set up your Podfile and create the necessary variables to configure your macCatalyst App.
       DESC
 
+      # self.abstract_command = true
+      # self.default_subcommand = 'list'
+
       self.arguments = []
 
       def run
-        UI.puts 'Did you mean `pod catalyst init`?'
+        UI.puts "Commands:\n"
+        UI.puts_indented "+ init\tSet up your Podfile to use `cocoapods-catalyst-support`".green
+        UI.puts_indented "+ validate\tValidate your catalyst configuration.".green
       end
 
     end
