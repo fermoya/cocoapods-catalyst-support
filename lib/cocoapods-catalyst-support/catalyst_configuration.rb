@@ -15,7 +15,7 @@ module CocoapodsCatalystSupport
       ios_dependencies << name
     end
   
-    def mac name
+    def macos name
       ios_dependencies.delete name
       mac_dependencies << name
     end

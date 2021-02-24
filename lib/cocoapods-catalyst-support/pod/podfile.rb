@@ -7,7 +7,7 @@ module Pod
         $catalyst_configuration.instance_eval &block
       end
 
-      def debug
+      def debug!
         $verbose = true
       end
     end

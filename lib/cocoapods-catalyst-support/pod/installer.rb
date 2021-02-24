@@ -4,7 +4,7 @@ module Pod
 
   class Installer
 
-    def configure_support_catalyst
+    def configure_catalyst
       catalyst_pods_to_remove = $catalyst_configuration.ios_dependencies
       if !catalyst_pods_to_remove.empty? 
         remove_dependencies catalyst_pods_to_remove, OSPlatform.macos, OSPlatform.ios
