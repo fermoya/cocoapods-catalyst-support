@@ -17,8 +17,8 @@ These are the steps to follow:
 - Configure your dependencies. Use `ios` or `macos` to make them available in one platform or the other:
 ```ruby
 catalyst_configuration do
-	ios 'Firebase/Analytics' # This dependency will only be available for iOS
-	macos 'AppCenter/Analytics' # This dependency will only be available for macOS
+  ios 'Firebase/Analytics' # This dependency will only be available for iOS
+  macos 'AppCenter/Analytics' # This dependency will only be available for macOS
 end
 ```
 - Run `pod catalyst validate` to validate your configuration
@@ -32,7 +32,7 @@ That's it! Simple as that.
 
 | **Command** | **Description** |
 |---|---|
-| `pod catalyst` | Lists available subcommands |
+| `pod catalyst` | Short version of `pod catalyst run`  |
 | `pod catalyst init` | Set up your Podfile to use `cocoapods-catalyst-support` |
 | `pod catalyst run` | Configure your catalyst dependencies |
 | `pod catalyst validate` | Validate your catalyst configuration |
@@ -94,14 +94,14 @@ target 'Sample' do
 end
 
 catalyst_configuration do
-	verbose!
+  verbose!
 
-	ios 'Firebase/Analytics'
-	macos 'AppCenter/Analytics'
+  ios 'Firebase/Analytics'
+  macos 'AppCenter/Analytics'
 end
 
 post_install do |installer|
-	installer.configure_catalyst
+  installer.configure_catalyst
 end
 ```
 
@@ -109,11 +109,11 @@ end
 * Make sure you're using the last version of the script.
 * Add `verbose!` to your `catalyst_configuration` and check if the library is being excluded.
 * Validate your `catalyst_configuration` by running `pod catalyst validate`.
-* Open an issue and provide your:
-    * Ruby version
-    * Cocoapods version
-    * Xcode version
-    * Podfile
+* Open an issue and specify:
+    * `cocoapods-catalyst-support` version
+    * _Cocoapods_ version
+    * _Xcode_ version
+    * _Podfile_
 
 ## Support Open Source
 

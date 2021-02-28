@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['fmdr.ct@gmail.com']
   spec.description   = %q{Helps you configure your Catalyst dependencies.}
   spec.summary       = %q{Many libraries you may use for iOS won't compile for your macCatalyst App, thus, making porting your App to the Mac world more difficult than initially expected. This is due to those libraries not being compiled for `x86_64`. `cocoapods-catalyst-support` helps you configure which libraries you'll be using for iOS and which for macCatalyst. }
-  spec.homepage      = 'https://github.com/fermoya/CatalystPodSupport'
+  spec.homepage      = 'https://github.com/fermoya/cocoapods-catalyst-support'
   spec.license       = 'MIT'
   spec.required_ruby_version = '>= 2.6'
 

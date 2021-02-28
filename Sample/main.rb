@@ -1,10 +1,13 @@
 #!/usr/bin/env ruby
+require 'cocoapods-catalyst-support'
 
-path = Pathname.new '/Users/fermoya/Documents/Projects/CatalystPodSupport/Sample/Podfile'
-podfile = Podfile.from_file path
+include Pod
 
-path = Pathname.new '/Users/fermoya/Documents/Projects/CatalystPodSupport/Sample/Podfile.lock'
-lockfile = Lockfile.from_file path
+file = Pathname.new (File.join __dir__, 'Podfile')
+podfile = Podfile.from_file file
+
+file = Pathname.new (File.join __dir__, 'Podfile.lock')
+lockfile = Lockfile.from_file file
 
 sandbox = Sandbox.new 'Pods'
 
