@@ -10,17 +10,16 @@ target 'Sample' do
   pod 'Firebase/Analytics'
 end
 
-#Show debug traces
-debug!
-
 #Configure your macCatalyst dependencies
 catalyst_configuration do
-	macos 'AppCenter/nalytics' #This dependency will only be available only for iOS
-	macos 'AppCenter/lytics' #This dependency will only be available only for iOS
-	ios 'FirebaseAnalytics' #This dependency will only be available only for macOS
+	#Uncomment for a verbose output
+	# verbose!
+
+	ios 'Firebase/Analytics' #This dependency will only be available only for iOS
+	macos 'AppCenter/Analytics' #This dependency will only be available only for macOS
 end
 
 #Configure your macCatalyst App
 post_install do |installer|
-	installer.confiure_catalyst
+	installer.configure_catalyst
 end

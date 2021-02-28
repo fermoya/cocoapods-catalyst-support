@@ -1,3 +1,4 @@
+require 'colorize'
 require_relative 'utils'
 
 module CocoapodsCatalystSupport
@@ -24,12 +25,12 @@ module CocoapodsCatalystSupport
       errors = []
       ios_failures = ios_pods.filter do |pod| !pods.include? pod end
       unless ios_failures.empty?
-        errors << "Unrecognized dependencies for iOS:\n#{ios_failures.map do |pod| "\t\t- #{pod}" end.join("\n") }"
+        errors << "- Unrecognized dependencies for iOS:\n#{ios_failures.map do |pod| "  + #{pod}" end.join("\n") }".red
       end
       
       mac_failures = mac_pods.filter do |pod| !pods.include? pod end
       unless mac_failures.empty?
-        errors << "Unrecognized dependencies for macOS:\n#{mac_failures.map do |pod| "\t\t- #{pod}" end.join("\n") }"
+        errors << "- Unrecognized dependencies for macOS:\n#{mac_failures.map do |pod| "  + #{pod}" end.join("\n") }".red
       end
       
       return errors
@@ -55,14 +56,12 @@ module CocoapodsCatalystSupport
     end
 
     config = ''
-    unless podfile.include? "debug!"
-      config += "\n#Show debug traces\ndebug!\n"
-    end
-
     unless podfile.match(/catalyst_configuration\s+do/)
-      config += "\n#Configure your macCatalyst dependencies"
-      config += "\ncatalyst_configuration do\n\t#ios '<pod_name>' #This dependency will only be available only for iOS"
-      config += "\n\t#macos '<pod_name>' #This dependency will only be available only for macOS\nend\n"
+      config += "\n#Configure your macCatalyst dependencies\n"
+      config += "catalyst_configuration do\n"
+      config += "\t#Uncomment for a verbose output\n\t#verbose!\n\n"
+      config += "\t#ios '<pod_name>' #This dependency will only be available only for iOS\n"
+      config += "\t#macos '<pod_name>' #This dependency will only be available only for macOS\nend\n"
     end
 
     is_catalyst_configured = podfile.match(/post_install[\S\s]+installer[\S\s]configure_catalyst/)
@@ -99,20 +98,20 @@ module CocoapodsCatalystSupport
     errors = []
 
     unless podfile.match(/require\s+[('|")]cocoapods-catalyst-support[('|")]/)
-      errors << "Are you missing `require cocoapods-catalyst-support` in your Podfile"
+      errors << "- Are you missing `require cocoapods-catalyst-support` in your Podfile".red
     end
 
     unless podfile.match(/catalyst_configuration\s+do/)
-      errors << "\tAre you missing `require cocoapods-catalyst-support` in your Podfile"
+      errors << "- Are you missing `require cocoapods-catalyst-support` in your Podfile".red
     end
 
     unless podfile.match(/post_install[\S\s]+installer[\S\s]configure_catalyst/)
-      errors << "\tAre you calling `configure_catalyst` from `post_install` phase?"
+      errors << "- Are you calling `configure_catalyst` from `post_install` phase?".red
     end
 
     pod_errors = podfile.validate
-    unless errors.empty?
-      errors << "#{pod_errors.reduce('') do |acc, s| "#{acc}\n\t#{s}" end }"
+    unless pod_errors.empty?
+      errors << "#{pod_errors.reduce('') do |acc, s| "#{acc}\n#{s}" end }"
     end
 
     unless errors.empty?

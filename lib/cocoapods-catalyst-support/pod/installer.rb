@@ -1,4 +1,4 @@
-require 'cocoapods-catalyst-support/catalyst_configuration.rb'
+require 'colorize'
 
 module Pod
 
@@ -10,11 +10,12 @@ module Pod
         remove_dependencies catalyst_pods_to_remove, OSPlatform.macos, OSPlatform.ios
       end
 
-      # ios_pods_to_remove = (defined? podfile.catalyst_only_pods) ? podfile.catalyst_only_pods : []
       ios_pods_to_remove = $catalyst_configuration.mac_dependencies
       if !ios_pods_to_remove.empty? 
         remove_dependencies ios_pods_to_remove, OSPlatform.ios, OSPlatform.macos
       end
+
+      puts "Done! Your Catalyst dependencies are ready to go".green
     end
 
     private

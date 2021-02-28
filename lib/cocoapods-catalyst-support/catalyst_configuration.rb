@@ -1,3 +1,5 @@
+require_relative 'utils' 
+
 module CocoapodsCatalystSupport
 
   class CatalystConfiguration
@@ -18,6 +20,10 @@ module CocoapodsCatalystSupport
     def macos name
       ios_dependencies.delete name
       mac_dependencies << name
+    end
+
+    def verbose!
+      $verbose = true
     end
   
   end

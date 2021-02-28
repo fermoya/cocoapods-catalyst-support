@@ -22,7 +22,7 @@ module Pod
           begin 
             validate_podfile
           rescue ValidationError => e
-            puts e.message.red
+            puts e.message
           else
             puts "Congratulations! Your catalyst configuration is valid.".green
           end
