@@ -20,24 +20,18 @@ module Pod
     #       in the `plugins.json` file, once your plugin is released.
     #
     class Catalyst < Command
-    
-      self.summary = 'Configure Catalyst Support in your Podfile.'
+      self.summary = 'Configure your catalyst dependencies'
 
       self.description = <<-DESC
         This plugin will set up your Podfile and create the necessary variables to configure your macCatalyst App.
+        See list of subcommands:
+        - `init`: Set up your Podfile to use `cocoapods-catalyst-support`
+        - `run`: Configure your catalyst dependencies
+        - `validate`: Validate your catalyst configuration
       DESC
 
-      # self.abstract_command = true
-      # self.default_subcommand = 'list'
-
-      self.arguments = []
-
-      def run
-        UI.puts "Commands:\n"
-        UI.puts_indented "+ init\tSet up your Podfile to use `cocoapods-catalyst-support`".green
-        UI.puts_indented "+ validate\tValidate your catalyst configuration.".green
-      end
-
+      self.abstract_command = true
+      self.default_subcommand = 'run'
     end
   end
 end

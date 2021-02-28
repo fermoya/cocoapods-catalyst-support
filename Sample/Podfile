@@ -12,11 +12,11 @@ end
 
 #Configure your macCatalyst dependencies
 catalyst_configuration do
-	#Uncomment for a verbose output
+	# Uncomment the next line for a verbose output
 	# verbose!
 
-	ios 'Firebase/Analytics' #This dependency will only be available only for iOS
-	macos 'AppCenter/Analytics' #This dependency will only be available only for macOS
+	ios 'Firebase/Analytics' # This dependency will only be available only for iOS
+	macos 'AppCenter/Analytics' # This dependency will only be available only for macOS
 end
 
 #Configure your macCatalyst App

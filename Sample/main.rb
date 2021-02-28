@@ -1,7 +1,5 @@
 #!/usr/bin/env ruby
 
-load 'remove_ios_only_frameworks.rb'
-
 path = Pathname.new '/Users/fermoya/Documents/Projects/CatalystPodSupport/Sample/Podfile'
 podfile = Podfile.from_file path
 

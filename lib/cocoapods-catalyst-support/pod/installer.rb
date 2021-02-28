@@ -15,7 +15,11 @@ module Pod
         remove_dependencies ios_pods_to_remove, OSPlatform.ios, OSPlatform.macos
       end
 
-      puts "Done! Your Catalyst dependencies are ready to go".green
+      unless ios_pods_to_remove.empty? && catalyst_pods_to_remove.empty?
+        puts "Catalyst => Done! Your Catalyst dependencies are ready to go".green
+      else
+        puts "Catalyst => Nothing to configure"
+      end
     end
 
     private

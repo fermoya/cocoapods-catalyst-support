@@ -38,7 +38,7 @@ module CocoapodsCatalystSupport
 
     @private
     def lookup key
-      results = scan(/#{key}\s+[('|")][\S]*[('|")]/).map do |match|
+      results = scan(/^[\s]*#{key}\s+[('|")][\S]*[('|")]/).map do |match|
         match.gsub!('/\s+/', ' ' )
         pod_name = match.split(' ')[1]
         pod_name.gsub! /[('|")]/, ''
@@ -57,18 +57,18 @@ module CocoapodsCatalystSupport
 
     config = ''
     unless podfile.match(/catalyst_configuration\s+do/)
-      config += "\n#Configure your macCatalyst dependencies\n"
+      config += "\n# Configure your macCatalyst dependencies\n"
       config += "catalyst_configuration do\n"
-      config += "\t#Uncomment for a verbose output\n\t#verbose!\n\n"
-      config += "\t#ios '<pod_name>' #This dependency will only be available only for iOS\n"
-      config += "\t#macos '<pod_name>' #This dependency will only be available only for macOS\nend\n"
+      config += "\t# Uncomment the next line for a verbose output\n\t# verbose!\n\n"
+      config += "\t# ios '<pod_name>' # This dependency will only be available for iOS\n"
+      config += "\t# macos '<pod_name>' # This dependency will only be available for macOS\nend\n"
     end
 
     is_catalyst_configured = podfile.match(/post_install[\S\s]+installer[\S\s]configure_catalyst/)
     changed = !(is_catalyst_configured && config.empty?)
     unless podfile.match /post_install\s+do/
       podfile += config
-      podfile += "\n#Configure your macCatalyst App\npost_install do |installer|\n\tinstaller.configure_catalyst\nend\n"
+      podfile += "\n# Configure your macCatalyst App\npost_install do |installer|\n\tinstaller.configure_catalyst\nend\n"
     else 
       configure_line = (podfile.include? 'configure_catalyst') ? "" : "\n\tinstaller.configure_catalyst\n"
       post_install_line = podfile.filter_lines do |line| line.include? 'post_install' end.first
