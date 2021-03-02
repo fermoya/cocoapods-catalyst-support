@@ -1,8 +1,5 @@
 source 'https://rubygems.org'
 
 gem 'cocoapods'
-# gem "cocoapods-keys"
-gem 'cocoapods-catalyst-support', path: "/Library/Ruby/Gems/2.6.0/gems/cocoapods-catalyst-support-0.1.0"
-# gem 'foreman', path: "~/Downloads/foreman-master"
-
+gem 'cocoapods-catalyst-support'
 gem "fastlane"

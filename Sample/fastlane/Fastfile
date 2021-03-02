@@ -20,4 +20,8 @@ platform :ios do
   lane :screenshots do
     capture_screenshots(workspace: "Sample.xcworkspace", scheme: "Sample")
   end
+
+  lane :install_pods do
+    cocoapods
+  end
 end

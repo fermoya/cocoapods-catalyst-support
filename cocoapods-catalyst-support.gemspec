@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
   
-  spec.add_dependency 'colorize', '~> 0.8'
+  spec.add_dependency 'colored2', '~> 3.1'
   spec.add_dependency 'cocoapods', '~> 1.9'
 
   spec.add_development_dependency 'bundler', '~> 1.3'
