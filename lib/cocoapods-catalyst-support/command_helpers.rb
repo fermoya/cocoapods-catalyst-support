@@ -1,4 +1,4 @@
-require 'colorize'
+require 'colored2'
 require_relative 'utils'
 
 module CocoapodsCatalystSupport

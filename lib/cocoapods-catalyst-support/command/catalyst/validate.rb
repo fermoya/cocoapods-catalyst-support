@@ -1,4 +1,4 @@
-require 'colorize'
+require 'colored2'
 require 'cocoapods-catalyst-support/command_helpers'
 
 include CocoapodsCatalystSupport
