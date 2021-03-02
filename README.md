@@ -7,6 +7,7 @@
 ```
 $ gem install cocoapods-catalyst-support
 ```
+**Note:** If you're using `cocoapods` action from `fastlane`, make sure to include `gem 'cocoapods-catalyst-support'` into your `Gemfile`. Don't forget to run `bundle install` after. For reference, see the [_Sample project_](https://github.com/fermoya/cocoapods-catalyst-support/tree/master/Sample).
 
 ## Usage
 
