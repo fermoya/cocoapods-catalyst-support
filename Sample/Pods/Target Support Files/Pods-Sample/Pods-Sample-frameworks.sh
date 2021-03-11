@@ -180,6 +180,9 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 	fi
   install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
 	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+	  install_framework "${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework"
+	fi
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
 	  install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
 	fi
 fi
@@ -188,6 +191,9 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
 	  install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
 	fi
   install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+	  install_framework "${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework"
+	fi
 	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
 	  install_framework "${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework"
 	fi
