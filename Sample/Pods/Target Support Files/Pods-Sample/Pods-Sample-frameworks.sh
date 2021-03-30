@@ -176,6 +176,23 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
 	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+	  install_framework "${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework"
+	fi
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+	  install_framework "${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework"
+	fi
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+	  install_framework "${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework"
+	fi
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+		if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+	  install_framework "${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework"
+	fi
+	fi
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+	  install_framework "${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework"
+	fi
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
 	  install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
 	fi
   install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
@@ -184,6 +201,23 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 	fi
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+	  install_framework "${BUILT_PRODUCTS_DIR}/AppAuth/AppAuth.framework"
+	fi
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+	  install_framework "${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework"
+	fi
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+	  install_framework "${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework"
+	fi
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+		if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+	  install_framework "${BUILT_PRODUCTS_DIR}/GTMAppAuth/GTMAppAuth.framework"
+	fi
+	fi
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+	  install_framework "${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework"
+	fi
 	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
 	  install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
 	fi

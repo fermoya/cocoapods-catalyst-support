@@ -8,6 +8,13 @@ use_frameworks!
 target 'Sample' do
   pod 'AppCenter/Analytics'
   pod 'Firebase/Analytics'
+
+  pod 'FirebaseUI/Auth'
+  pod 'FirebaseUI/Phone'
+  pod 'FirebaseUI/Facebook'
+  pod 'FirebaseUI/Google'
+  pod 'FirebaseUI/Email'
+  pod 'FirebaseUI/OAuth'
 end
 
 #Configure your macCatalyst dependencies
@@ -17,6 +24,7 @@ catalyst_configuration do
 
 	ios 'Firebase/Analytics' # This dependency will only be available only for iOS
 	macos 'AppCenter/Analytics' # This dependency will only be available only for macOS
+  ios 'FirebaseUI/Google'
 end
 
 #Configure your macCatalyst App
