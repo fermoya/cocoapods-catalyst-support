@@ -29,8 +29,15 @@ module Pod
 
       ###### Variable definition ###### 
       all_pods = podfile.dependencies #PodDependency
-      pod_names_to_keep = all_pods.filter do |d| !pod_names_to_remove.include? d.name end.flat_map do |d| d.target_names end.uniq
-      pod_names_to_remove = all_pods.flat_map do |d| d.target_names end.uniq.filter do |name| !pod_names_to_keep.include? name end
+      pods_to_keep = all_pods.filter do |pod| !pod_names_to_remove.include? pod.name end
+      pods_to_remove = all_pods.filter do |pod| !pods_to_keep.include? pod end
+
+      root_pods_to_keep = pods_to_keep.map do |pod| pod.to_root_dependency end
+      root_pods_to_remove = pods_to_remove.map do |pod| pod.to_root_dependency end.filter do |pod| !root_pods_to_keep.include? pod end
+      pods_to_remove += root_pods_to_remove
+
+      pod_names_to_keep = pods_to_keep.flat_map do |d| d.target_names end.uniq
+      pod_names_to_remove = pods_to_remove.flat_map do |d| d.target_names end.uniq.filter do |name| !pod_names_to_keep.include? name end
       
       pod_names_to_keep = pod_dependencies(pod_names_to_keep)
       pod_names_to_remove = pod_dependencies(pod_names_to_remove).filter do |name| !pod_names_to_keep.include? name end
@@ -109,8 +116,8 @@ module Pod
 	
     def pod_dependencies names
       pod_names = names
-      return pod_names unless lockfile
-      pods = lockfile.internal_data['PODS'] unless lockfile.nil?
+      return pod_names unless sandbox.manifest
+      pods = sandbox.manifest.internal_data['PODS']
       pods.each do |pod|
         key = pod.keys.first unless pod.is_a?(String)
         key ||= pod
