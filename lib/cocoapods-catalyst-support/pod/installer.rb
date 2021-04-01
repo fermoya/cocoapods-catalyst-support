@@ -28,9 +28,13 @@ module Pod
       loggs "\n#### Configuring #{remove_platform.name} dependencies ####\n"
 
       ###### Variable definition ###### 
-      all_pods = podfile.dependencies.flat_map do |d| [d.name, d.to_root_dependency.name] end.to_set.to_a.map do |s| s.sub('/', '') end
-      pod_names_to_remove = podfile.dependencies.filter do |d| pod_names_to_remove.include? d.name end.flat_map do |d| [d.name, d.to_root_dependency.name] end.map do |s| s.sub('/', '') end
-      pod_names_to_keep = all_pods.filter do |name| !pod_names_to_remove.include? name end
+      all_pods = podfile.dependencies #PodDependency
+      pod_names_to_keep = all_pods.filter do |d| !pod_names_to_remove.include? d.name end.flat_map do |d| d.target_names end.uniq
+      pod_names_to_remove = all_pods.flat_map do |d| d.target_names end.uniq.filter do |name| !pod_names_to_keep.include? name end
+      
+      pod_names_to_keep = pod_dependencies(pod_names_to_keep)
+      pod_names_to_remove = pod_dependencies(pod_names_to_remove).filter do |name| !pod_names_to_keep.include? name end
+      
       $verbose = (defined? podfile.debug) ? podfile.debug : $verbose
 
       pod_names_to_keep = recursive_dependencies(pod_names_to_keep)
@@ -101,6 +105,26 @@ module Pod
         loggs "\t\t-Uninstalling resources"
         target.uninstall_resources resources_to_uninstall, remove_platform
       end
+    end
+	
+    def pod_dependencies names
+      pod_names = names
+      return pod_names unless lockfile
+      pods = lockfile.internal_data['PODS'] unless lockfile.nil?
+      pods.each do |pod|
+        key = pod.keys.first unless pod.is_a?(String)
+        key ||= pod
+        pod_name = key.split(' ')[0]
+        if names.include? pod_name
+          dependencies = pod[key]
+          unless dependencies.is_a?(String)
+            dependencies = dependencies.map do |s| s.split(' ')[0] end
+            dependencies += pod_dependencies(dependencies)
+            pod_names += [pod_name] + dependencies
+          end
+        end
+      end
+      return pod_names.uniq
     end
 
     def recursive_dependencies to_filter_names

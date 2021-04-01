@@ -13,6 +13,7 @@ require 'cocoapods-catalyst-support/xcodeproj/target_dependency'
 
 require 'cocoapods-catalyst-support/pod/pod_target'
 require 'cocoapods-catalyst-support/pod/podfile'
+require 'cocoapods-catalyst-support/pod/dependency'
 require 'cocoapods-catalyst-support/pod/installer'
 
 include CocoapodsCatalystSupport
