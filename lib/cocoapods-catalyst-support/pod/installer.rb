@@ -32,9 +32,9 @@ module Pod
       pods_to_keep = all_pods.filter do |pod| !pod_names_to_remove.include? pod.name end
       pods_to_remove = all_pods.filter do |pod| !pods_to_keep.include? pod end
 
-      root_pods_to_keep = pods_to_keep.map do |pod| pod.to_root_dependency end
-      root_pods_to_remove = pods_to_remove.map do |pod| pod.to_root_dependency end.filter do |pod| !root_pods_to_keep.include? pod end
-      pods_to_remove += root_pods_to_remove
+      # root_pods_to_keep = pods_to_keep.map do |pod| pod.to_root_dependency end
+      # root_pods_to_remove = pods_to_remove.map do |pod| pod.to_root_dependency end.filter do |pod| !root_pods_to_keep.include? pod end
+      # pods_to_remove += root_pods_to_remove
 
       pod_names_to_keep = pods_to_keep.flat_map do |d| d.target_names end.uniq
       pod_names_to_remove = pods_to_remove.flat_map do |d| d.target_names end.uniq.filter do |name| !pod_names_to_keep.include? name end
@@ -91,15 +91,18 @@ module Pod
       end.each do |target| 
         loggs "\tTarget: #{target.name}"
         target.add_platform_filter_to_build_phases keep_platform
-        target.add_platform_filter_to_dependencies keep_platform
       end
 
       loggs "\n#### Filtering dependencies ####"
-      targets_to_remove.filter do |target| 
-        !pods_project.native_targets.include? target
-      end.each do |target| 
+      targets_to_remove.each do |target| 
         loggs "\tTarget: #{target.name}"
         target.add_platform_filter_to_dependencies keep_platform
+      end
+
+      target_names_to_remove = targets_to_remove.map do |t| t.name end
+      pods_project.targets.each do |target| 
+        loggs "\tTarget: #{target.name}"
+        target.add_platform_filter_to_dependencies keep_platform, target_names_to_remove
       end
 
       ###### FRAMEWORKS AND RESOURCES SCRIPT -> if [ "$SDKROOT" != "MacOS" ]; then #######   

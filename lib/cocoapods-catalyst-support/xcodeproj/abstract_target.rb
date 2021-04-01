@@ -5,9 +5,12 @@ module Xcodeproj::Project::Object
   
     ###### STEP 2 ######
     # In all targets (aggregates + native), filter dependencies
-    def add_platform_filter_to_dependencies platform
+    def add_platform_filter_to_dependencies platform, whitelist = nil
       loggs "\t\t- Filtering dependencies"
-      dependencies.each do |dependency|
+      whitelist ||= dependencies.map do |d| d.name end 
+      dependencies.filter do |d|
+        whitelist.include? d.name
+      end.each do |dependency|
         dependency.platform_filter = platform.name.to_s
       end
     end
