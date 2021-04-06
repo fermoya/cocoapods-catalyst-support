@@ -44,7 +44,7 @@ module Xcodeproj::Project::Object
         new_snippet = snippet.clone
         should_uninstall = configurations.map do |string| snippet.include? string end.reduce(false) do |total, condition| total = total || condition end
         keys.each do |key|
-          lines_to_replace = snippet.filter_lines do |line| line.include? "#{key}" end.to_set.to_a
+          lines_to_replace = snippet.filter_lines do |line| line.match "\/#{key}" end.to_set.to_a
           unless lines_to_replace.empty?
             changed = true
             lines_to_replace.each do |line|
