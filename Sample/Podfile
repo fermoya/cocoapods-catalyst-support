@@ -6,7 +6,9 @@ require 'cocoapods-catalyst-support'
 use_frameworks!
 
 target 'Sample' do
-  pod 'AppCenter/Analytics'
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Functions'
+  pod 'Firebase/Crashlytics'
   pod 'Firebase/Analytics'
 end
 
@@ -15,8 +17,10 @@ catalyst_configuration do
 	# Uncomment the next line for a verbose output
 	# verbose!
 
-	ios 'Firebase/Analytics' # This dependency will only be available only for iOS
-	macos 'AppCenter/Analytics' # This dependency will only be available only for macOS
+  ios 'Firebase/Messaging'
+  ios 'Firebase/Functions'
+  ios 'Firebase/Crashlytics'
+  ios 'Firebase/Analytics'
 end
 
 #Configure your macCatalyst App

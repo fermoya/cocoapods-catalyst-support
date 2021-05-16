@@ -10,7 +10,7 @@ import UIKit
 #if !targetEnvironment(macCatalyst)
 import Firebase
 #else
-import AppCenter
+//import AppCenter
 #endif
 
 class ViewController: UIViewController {
