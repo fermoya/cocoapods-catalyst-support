@@ -14,27 +14,64 @@ module Xcodeproj::Project::Object
   
     ###### STEP 3 ######
     # If any unsupported library, then flag as platform-dependant for every build configuration
-    def flag_libraries libraries, platform
+    def flag_libraries dependencies, platform
       loggs "\tTarget: #{name}"
-      build_configurations.filter do |config| !config.base_configuration_reference.nil? 
+      build_configurations.filter do |config| 
+        !config.base_configuration_reference.nil? 
       end.each do |config|
         loggs "\t\tScheme: #{config.name}"
         xcconfig_path = config.base_configuration_reference.real_path
         xcconfig = File.read(xcconfig_path)
-  
+
+        other_ldflags = xcconfig.filter_lines do |line| line.include? 'OTHER_LDFLAGS = ' end.first || ''
+        header_search_paths = xcconfig.filter_lines do |line| line.include? 'HEADER_SEARCH_PATHS = ' end.first  || ''
+        framework_search_paths = xcconfig.filter_lines do |line| line.include? 'FRAMEWORK_SEARCH_PATHS = ' end.first  || ''
+        other_swift_flags = xcconfig.filter_lines do |line| line.include? 'OTHER_SWIFT_FLAGS = ' end.first || ''
+        
+        new_other_ldflags = "OTHER_LDFLAGS[sdk=#{platform.sdk}] = $(inherited) -ObjC"
+        new_header_search_paths = "HEADER_SEARCH_PATHS[sdk=#{platform.sdk}] = $(inherited)"
+        new_framework_search_paths = "FRAMEWORK_SEARCH_PATHS[sdk=#{platform.sdk}] = $(inherited)"
+        new_other_swift_flags = "OTHER_SWIFT_FLAGS[sdk=#{platform.sdk}] = $(inherited) -D COCOAPODS"
+        new_xcconfig = xcconfig.gsub!(other_ldflags, '').gsub!(header_search_paths, '').gsub!(other_swift_flags, '').gsub!(framework_search_paths, '')
+
         changed = false
-        libraries.each do |framework|
-          if xcconfig.include? framework
-            xcconfig.gsub!(framework, '')
-            unless xcconfig.include? "OTHER_LDFLAGS[sdk=#{platform.sdk}]"
-              changed = true
-              xcconfig += "\nOTHER_LDFLAGS[sdk=#{platform.sdk}] = $(inherited) -ObjC "
-            end
-            xcconfig += framework + ' '
+        dependencies.each do |dependency|
+          if other_ldflags.include? dependency.link
+            other_ldflags.gsub! dependency.link, ''
+            changed = true
+            new_other_ldflags += " #{dependency.link}"
+          end
+
+          regex = /(?<=[\s])([\"|-][\S]*#{dependency.name}[\S]*\")(?=[\s]?)/
+          if header_search_paths.match? regex
+            to_replace = header_search_paths.scan(regex).flat_map do |m| m end.first
+            header_search_paths.gsub! to_replace, ''
+            changed = true
+            new_header_search_paths += " #{to_replace}"
+          end
+
+          if framework_search_paths.match? regex
+            to_replace = framework_search_paths.scan(regex).flat_map do |m| m end.first
+            framework_search_paths.gsub! to_replace, ''
+            changed = true
+            new_framework_search_paths += " #{to_replace}"
+          end
+
+          if other_swift_flags.match? regex
+            to_replace = other_swift_flags.scan(regex).flat_map do |m| m end.first
+            other_swift_flags.gsub! to_replace, ''
+            changed = true
+            new_other_swift_flags += " #{to_replace}"
           end
         end
   
-        File.open(xcconfig_path, "w") { |file| file << xcconfig }
+        if changed
+          new_xcconfig += "\n#{other_ldflags}\n#{other_swift_flags}\n#{framework_search_paths}\n#{header_search_paths}"
+          new_xcconfig += "\n#{new_other_ldflags}\n#{new_other_swift_flags}\n#{new_framework_search_paths}\n#{new_header_search_paths}"
+          new_xcconfig.gsub! /\n+/, "\n"
+          new_xcconfig.gsub! /[ ]+/, " "
+          File.open(xcconfig_path, "w") { |file| file << new_xcconfig }
+        end
         loggs "\t\t\t#{changed ? "Succeded" : "Nothing to flag"}"
       end
     end

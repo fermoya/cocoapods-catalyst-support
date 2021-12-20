@@ -36,7 +36,7 @@ module Pod
       pod_names_to_keep = recursive_dependencies(pod_names_to_keep)
       pod_targets_to_keep = pod_targets.filter do |pod| pod_names_to_keep.include? pod.module_name end       # PodTarget
 
-      pod_names_to_remove = recursive_dependencies(pod_names_to_remove).filter do |name| !pod_names_to_keep.include? name end
+      pod_names_to_remove = recursive_dependencies(pod_names_to_remove).filter do |name| !pod_names_to_keep.include? name end.to_set.to_a
       pod_targets_to_remove = pod_targets.filter do |pod| pod_names_to_remove.include? pod.module_name end   # PodTarget
 
       loggs "\n#### Unsupported Libraries ####\n#{pod_names_to_remove}\n"
@@ -53,9 +53,7 @@ module Pod
       dependencies_to_remove = dependencies_to_remove + targets_to_remove.flat_map do |target| target.to_dependency end + pod_targets_to_remove.flat_map do |pod| pod.vendor_products + pod.frameworks end
       dependencies_to_remove = dependencies_to_remove.filter do |d|  !dependencies_to_keep.include? d end
 
-      ###### CATALYST NOT SUPPORTED LINKS ###### 
-      unsupported_links = dependencies_to_remove.map do |d| d.link end.to_set.to_a
-      
+      ###### CATALYST NOT SUPPORTED LINKS ######       
       loggs "\n#### Unsupported dependencies ####\n"
       loggs "#{dependencies_to_remove.map do |d| d.name end.to_set.to_a }\n\n"
 
@@ -71,7 +69,7 @@ module Pod
 
       ###### OTHER LINKER FLAGS -> to iphone* ###### 
       loggs "#### Flagging unsupported libraries ####"
-      pods_project.targets.filter do |target| target.platform_name == OSPlatform.ios.name end.each do |target| target.flag_libraries unsupported_links, keep_platform end
+      pods_project.targets.filter do |target| target.platform_name == OSPlatform.ios.name end.each do |target| target.flag_libraries dependencies_to_remove.to_set.to_a, keep_platform end
 
       ###### BUILD_PHASES AND DEPENDENCIES -> PLATFORM_FILTER 'ios' ###### 
       loggs "\n#### Filtering build phases ####"
