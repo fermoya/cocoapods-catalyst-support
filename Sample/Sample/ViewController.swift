@@ -7,9 +7,11 @@
 
 import UIKit
 
-#if !targetEnvironment(macCatalyst)
+#if canImport(Firebase)
 import Firebase
-#else
+#endif
+
+#if canImport(AppCenter)
 import AppCenter
 #endif
 
