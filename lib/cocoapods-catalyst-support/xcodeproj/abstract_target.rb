@@ -42,7 +42,7 @@ module Xcodeproj::Project::Object
             new_other_ldflags += " #{dependency.link}"
           end
 
-          regex = /(?<=[\s])([\"|-][\S]*#{dependency.name}[\S]*\")(?=[\s]?)/
+          regex = /(?<=[\s])([\"|-][\S]*#{Regexp.escape(dependency.name)}[\S]*\")(?=[\s]?)/
           if header_search_paths.match? regex
             to_replace = header_search_paths.scan(regex).flat_map do |m| m end.first
             header_search_paths.gsub! to_replace, ''
