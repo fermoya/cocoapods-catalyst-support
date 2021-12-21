@@ -1,4 +1,4 @@
-framework module GoogleDataTransport {
+module GoogleDataTransport {
   umbrella header "GoogleDataTransport-umbrella.h"
 
   export *

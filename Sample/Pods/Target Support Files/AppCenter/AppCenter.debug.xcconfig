@@ -9,13 +9,8 @@ PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkInterme
 PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
 SKIP_INSTALL = YES
 USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
-OTHER_LDFLAGS[sdk=iphone*] = $(inherited) -ObjC
-OTHER_SWIFT_FLAGS[sdk=iphone*] = $(inherited) -D COCOAPODS
-FRAMEWORK_SEARCH_PATHS[sdk=iphone*] = $(inherited) "${PODS_XCFRAMEWORKS_BUILD_DIR}/AppCenter/Analytics"
-HEADER_SEARCH_PATHS[sdk=iphone*] = $(inherited)
-OTHER_LDFLAGS = $(inherited) -l"sqlite3" -l"z" -framework "CoreTelephony" -framework "Foundation" -framework "SystemConfiguration" -framework "UIKit"
 FRAMEWORK_SEARCH_PATHS = $(inherited) 
 OTHER_LDFLAGS[sdk=macosx*] = $(inherited) -ObjC
 OTHER_SWIFT_FLAGS[sdk=macosx*] = $(inherited) -D COCOAPODS
-FRAMEWORK_SEARCH_PATHS[sdk=macosx*] = $(inherited) "${PODS_ROOT}/AppCenter/AppCenter-SDK-Apple" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AppCenter/Core"
+FRAMEWORK_SEARCH_PATHS[sdk=macosx*] = $(inherited) "${PODS_ROOT}/AppCenter/AppCenter-SDK-Apple" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AppCenter/Analytics" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AppCenter/Core"
 HEADER_SEARCH_PATHS[sdk=macosx*] = $(inherited)

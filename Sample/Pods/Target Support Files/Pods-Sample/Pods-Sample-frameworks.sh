@@ -177,7 +177,9 @@ code_sign_if_enabled() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
 	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
-	  install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+		  install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
+	fi
 	fi
 	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
 	  install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"
@@ -188,7 +190,9 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
 	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
-	  install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
+	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
+		  install_framework "${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework"
+	fi
 	fi
 	if [[ "$SDKROOT" != *"MacOS"* ]]; then 
 	  install_framework "${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework"

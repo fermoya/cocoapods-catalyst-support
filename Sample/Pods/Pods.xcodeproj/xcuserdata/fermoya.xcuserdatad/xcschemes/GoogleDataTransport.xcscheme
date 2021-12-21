@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5C0371EE948D0357B8EE0E34ABB44BF0"
-               BuildableName = "GoogleDataTransport.framework"
+               BuildableName = "libGoogleDataTransport.a"
                BlueprintName = "GoogleDataTransport"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
