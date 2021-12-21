@@ -16,6 +16,7 @@ module Xcodeproj::Project::Object
     # If any unsupported library, then flag as platform-dependant for every build configuration
     def flag_libraries dependencies, platform
       loggs "\tTarget: #{name}"
+
       build_configurations.filter do |config| 
         !config.base_configuration_reference.nil? 
       end.each do |config|
@@ -42,7 +43,7 @@ module Xcodeproj::Project::Object
             new_other_ldflags += " #{dependency.link}"
           end
 
-          regex = /(?<=[\s])([\"|-][\S]*#{Regexp.escape(dependency.name)}[\S]*\")(?=[\s]?)/
+          regex = /(?<=[\s])((-Xcc )*[\"|-][\S]*#{Regexp.escape(dependency.name)}[\S]*\")(?=[\s]?)/
           if header_search_paths.match? regex
             to_replace = header_search_paths.scan(regex).flat_map do |m| m end.first
             header_search_paths.gsub! to_replace, ''
