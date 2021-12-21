@@ -1,4 +1,4 @@
-framework module FirebaseInstallations {
+module FirebaseInstallations {
   umbrella header "FirebaseInstallations-umbrella.h"
 
   export *

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2BBF7206D7FAC92C82A042A99C4A98F8"
-               BuildableName = "FBLPromises.framework"
+               BuildableName = "libPromisesObjC.a"
                BlueprintName = "PromisesObjC"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

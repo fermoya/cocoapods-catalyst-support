@@ -1,4 +1,4 @@
-framework module GoogleDataTransportCCTSupport {
+module GoogleDataTransportCCTSupport {
   umbrella header "GoogleDataTransportCCTSupport-umbrella.h"
 
   export *

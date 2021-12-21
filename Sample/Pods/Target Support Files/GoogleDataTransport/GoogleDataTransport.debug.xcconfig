@@ -12,8 +12,8 @@ PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkInterme
 PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
 SKIP_INSTALL = YES
 USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
-HEADER_SEARCH_PATHS = $(inherited) 
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Public" 
 OTHER_LDFLAGS[sdk=iphone*] = $(inherited) -ObjC
 OTHER_SWIFT_FLAGS[sdk=iphone*] = $(inherited) -D COCOAPODS
 FRAMEWORK_SEARCH_PATHS[sdk=iphone*] = $(inherited)
-HEADER_SEARCH_PATHS[sdk=iphone*] = $(inherited) "${PODS_TARGET_SRCROOT}/GoogleDataTransport/"
+HEADER_SEARCH_PATHS[sdk=iphone*] = $(inherited) "${PODS_ROOT}/Headers/Private/GoogleDataTransport" "${PODS_TARGET_SRCROOT}/GoogleDataTransport/"
