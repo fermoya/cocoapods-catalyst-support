@@ -73,13 +73,19 @@ It doesn't "magically" fix the pod. If the pod isn't built for `sdk MacOS`, then
 
 ### What does this library DO?
 
-It configures your pods project so that these "unsupported pods" are not linked when building for _macOS_ and will strip those frameworks from the final _Product_. You'll still need to use the precompiler and remove features from your _macCatalyst_ App:
+It configures your pods project so that these "unsupported pods" are not linked when building for _macOS_ and will strip those frameworks from the final _Product_. You'll still need to use the precompiler to remove features from your _macCatalyst_ App:
 ```swift
 #if !targetEnvironment(macCatalyst) 
     // code to be excluded at compilation time from your macOS app
 #endif
 ```
-The advantage is you still get to use them for _iOS_ and _iPadOS_.
+if you `use_frameworks!` in your `Podfile` or
+```swift
+#if canImport(FirebaseAnalytics)
+    import FirebaseAnalytics
+#endif
+```
+if you `use_modular_headers!`. The advantage is you still get to use them for _iOS_ and _iPadOS_.
 
 ## Example
 
