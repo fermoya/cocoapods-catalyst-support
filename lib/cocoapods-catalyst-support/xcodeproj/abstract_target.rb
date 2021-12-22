@@ -42,33 +42,41 @@ module Xcodeproj::Project::Object
             changed = true
             new_other_ldflags += " #{dependency.link}"
           end
-
-          regex = /(?<=[\s])((-Xcc )*[\"|-][\S]*#{Regexp.escape(dependency.name)}[\S]*\")(?=[\s]?)/
+          
+          regex = /(?<=[\s])([\"]*[\S]*#{Regexp.escape(dependency.name)}[\S]*[\"]*)(?=[\s]?)/
           if header_search_paths.match? regex
-            to_replace = header_search_paths.scan(regex).flat_map do |m| m end.first
-            header_search_paths.gsub! to_replace, ''
+            to_replace = header_search_paths.scan(regex).flat_map do |m| m end.filter do |m| !m.nil? && !m.empty? end.each do |to_replace|
+              header_search_paths.gsub! to_replace, ''
+              new_header_search_paths += " #{to_replace}"
+            end
             changed = true
-            new_header_search_paths += " #{to_replace}"
           end
 
+          regex = /(?<=[\s])([\"][\S]*#{Regexp.escape(dependency.name)}[\S]*\")(?=[\s]?)/
           if framework_search_paths.match? regex
-            to_replace = framework_search_paths.scan(regex).flat_map do |m| m end.first
-            framework_search_paths.gsub! to_replace, ''
+            to_replace = framework_search_paths.scan(regex).flat_map do |m| m end.filter do |m| !m.nil? && !m.empty? end.each do |to_replace|
+              framework_search_paths.gsub! to_replace, ''
+              new_framework_search_paths += " #{to_replace}"
+            end
             changed = true
-            new_framework_search_paths += " #{to_replace}"
           end
 
+          regex = /(?<=[\s])(-Xcc -[\S]*#{Regexp.escape(dependency.name)}[\S]*\")(?=[\s]?)/
           if other_swift_flags.match? regex
-            to_replace = other_swift_flags.scan(regex).flat_map do |m| m end.first
-            other_swift_flags.gsub! to_replace, ''
+            to_replace = other_swift_flags.scan(regex).flat_map do |m| m end.filter do |m| !m.nil? && !m.empty? end.each do |to_replace|
+              other_swift_flags.gsub! to_replace, ''
+              new_other_swift_flags += " #{to_replace}"
+            end
             changed = true
-            new_other_swift_flags += " #{to_replace}"
           end
         end
   
         if changed
-          new_xcconfig += "\n#{other_ldflags}\n#{other_swift_flags}\n#{framework_search_paths}\n#{header_search_paths}"
-          new_xcconfig += "\n#{new_other_ldflags}\n#{new_other_swift_flags}\n#{new_framework_search_paths}\n#{new_header_search_paths}"
+          new_xcconfig += "\n#{other_ldflags}\n#{framework_search_paths}\n#{header_search_paths}"
+          new_xcconfig += "\n#{new_other_ldflags}\n#{new_framework_search_paths}\n#{new_header_search_paths}"
+          if !other_swift_flags.empty?
+            new_xcconfig += "\n#{other_swift_flags}\n#{new_other_swift_flags}"
+          end
           new_xcconfig.gsub! /\n+/, "\n"
           new_xcconfig.gsub! /[ ]+/, " "
           File.open(xcconfig_path, "w") { |file| file << new_xcconfig }
