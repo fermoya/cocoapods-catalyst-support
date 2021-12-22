@@ -79,13 +79,13 @@ It configures your pods project so that these "unsupported pods" are not linked 
     // code to be excluded at compilation time from your macOS app
 #endif
 ```
-if you `use_frameworks!` in your `Podfile` or
+or
 ```swift
 #if canImport(FirebaseAnalytics)
     import FirebaseAnalytics
 #endif
 ```
-if you `use_modular_headers!`. The advantage is you still get to use them for _iOS_ and _iPadOS_.
+The advantage is you still get to use them for _iOS_ and _iPadOS_.
 
 ## Example
 
