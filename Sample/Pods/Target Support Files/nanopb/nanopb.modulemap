@@ -1,4 +1,4 @@
-module nanopb {
+framework module nanopb {
   umbrella header "nanopb-umbrella.h"
 
   export *

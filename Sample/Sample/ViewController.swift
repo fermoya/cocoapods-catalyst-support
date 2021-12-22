@@ -22,6 +22,15 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
 }
 
+class Test {
+    func doSth() {
+        #if canImport(AppCenter)
+        print("AppCenter can be imported")
+        #endif
+        #if canImport(Firebase)
+        print("Firebase can be imported")
+        #endif
+    }
+}

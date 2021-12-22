@@ -15,7 +15,7 @@
 		173510D125BC9158005AF6BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 173510CF25BC9158005AF6BF /* LaunchScreen.storyboard */; };
 		173510DC25BC9158005AF6BF /* SampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173510DB25BC9158005AF6BF /* SampleTests.swift */; };
 		173510E725BC9158005AF6BF /* SampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173510E625BC9158005AF6BF /* SampleUITests.swift */; };
-		2A464664235D913DAAC2AC67 /* libPods-Sample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 897EB9EFB0B1F0867923FC8D /* libPods-Sample.a */; };
+		78740E76A51EADDDDCBBC05C /* Pods_Sample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7177ACC4ACDBFC5207AA0EF /* Pods_Sample.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +53,7 @@
 		1735115925BC9D31005AF6BF /* Sample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Sample.entitlements; sourceTree = "<group>"; };
 		1D57827D312961836AB4FEBA /* Pods-Sample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.release.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.release.xcconfig"; sourceTree = "<group>"; };
 		6BFC161FE9DC054D1AC3ED38 /* Pods-Sample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Sample.debug.xcconfig"; path = "Target Support Files/Pods-Sample/Pods-Sample.debug.xcconfig"; sourceTree = "<group>"; };
-		897EB9EFB0B1F0867923FC8D /* libPods-Sample.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Sample.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7177ACC4ACDBFC5207AA0EF /* Pods_Sample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Sample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,7 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A464664235D913DAAC2AC67 /* libPods-Sample.a in Frameworks */,
+				78740E76A51EADDDDCBBC05C /* Pods_Sample.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,7 +140,7 @@
 		75AEC9F9B2EF634DE5E037DC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				897EB9EFB0B1F0867923FC8D /* libPods-Sample.a */,
+				F7177ACC4ACDBFC5207AA0EF /* Pods_Sample.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -165,6 +165,7 @@
 				173510BD25BC9157005AF6BF /* Sources */,
 				173510BE25BC9157005AF6BF /* Frameworks */,
 				173510BF25BC9157005AF6BF /* Resources */,
+				F9573819B628F488A159D6D4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -301,6 +302,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F9573819B628F488A159D6D4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sample/Pods-Sample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Sample/Pods-Sample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Sample/Pods-Sample-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

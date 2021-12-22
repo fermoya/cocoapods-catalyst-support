@@ -2,7 +2,6 @@ CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
 CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInstallations
 GCC_C_LANGUAGE_STANDARD = c99
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1 FIRInstallations_LIB_VERSION=1.4.0
-OTHER_CFLAGS = $(inherited) -fmodule-map-file="${PODS_ROOT}/Headers/Public/FBLPromises/PromisesObjC.modulemap" -fmodule-map-file="${PODS_ROOT}/Headers/Public/FirebaseCore/FirebaseCore.modulemap" -fmodule-map-file="${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.modulemap" -fmodule-map-file="${PODS_ROOT}/Headers/Public/GoogleDataTransport/GoogleDataTransport.modulemap" -fmodule-map-file="${PODS_ROOT}/Headers/Public/GoogleDataTransportCCTSupport/GoogleDataTransportCCTSupport.modulemap" -fmodule-map-file="${PODS_ROOT}/Headers/Public/GoogleUtilities/GoogleUtilities.modulemap" -fmodule-map-file="${PODS_ROOT}/Headers/Public/nanopb/nanopb.modulemap"
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}
@@ -11,8 +10,8 @@ PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkInterme
 PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
 SKIP_INSTALL = YES
 USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
-HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Public" "${PODS_TARGET_SRCROOT}"
+FRAMEWORK_SEARCH_PATHS = $(inherited) 
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_TARGET_SRCROOT}"
 OTHER_LDFLAGS[sdk=iphone*] = $(inherited) -ObjC
-OTHER_SWIFT_FLAGS[sdk=iphone*] = $(inherited) -D COCOAPODS
-FRAMEWORK_SEARCH_PATHS[sdk=iphone*] = $(inherited)
-HEADER_SEARCH_PATHS[sdk=iphone*] = $(inherited) "${PODS_ROOT}/Headers/Private/FirebaseInstallations" "${PODS_ROOT}/Headers/Public/PromisesObjC"
+FRAMEWORK_SEARCH_PATHS[sdk=iphone*] = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore" "${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics" "${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport" "${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransportCCTSupport" "${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities" "${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC" "${PODS_CONFIGURATION_BUILD_DIR}/nanopb"
+HEADER_SEARCH_PATHS[sdk=iphone*] = $(inherited)
