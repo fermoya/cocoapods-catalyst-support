@@ -1,4 +1,4 @@
-module GoogleUtilities {
+framework module GoogleUtilities {
   umbrella header "GoogleUtilities-umbrella.h"
 
   export *
