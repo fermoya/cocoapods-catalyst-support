@@ -1,0 +1,16 @@
+CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
+CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/AdColony
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_ROOT = ${SRCROOT}
+PODS_TARGET_SRCROOT = ${PODS_ROOT}/AdColony
+PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates
+PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
+SKIP_INSTALL = YES
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
+OTHER_LDFLAGS = $(inherited) 
+FRAMEWORK_SEARCH_PATHS = $(inherited) 
+OTHER_LDFLAGS[sdk=iphone*] = $(inherited) -ObjC -l"z" -framework "AVFoundation" -framework "AdColony" -framework "AdSupport" -framework "AudioToolbox" -framework "CoreMedia" -framework "CoreServices" -framework "CoreTelephony" -framework "JavaScriptCore" -framework "MessageUI" -framework "SafariServices" -framework "SystemConfiguration" -weak_framework "AppTrackingTransparency" -weak_framework "Social" -weak_framework "StoreKit" -weak_framework "WatchConnectivity" -weak_framework "WebKit" -l"sqlite3"
+FRAMEWORK_SEARCH_PATHS[sdk=iphone*] = $(inherited) "${PODS_ROOT}/AdColony" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AdColony"
+HEADER_SEARCH_PATHS[sdk=iphone*] = $(inherited)

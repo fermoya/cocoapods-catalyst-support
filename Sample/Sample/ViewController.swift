@@ -7,30 +7,20 @@
 
 import UIKit
 
-#if canImport(Firebase)
-import Firebase
-#endif
-
-#if canImport(AppCenter)
-import AppCenter
+#if canImport(AdColony)
+import AdColony
 #endif
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    }
 
-}
-
-class Test {
-    func doSth() {
-        #if canImport(AppCenter)
-        print("AppCenter can be imported")
-        #endif
-        #if canImport(Firebase)
-        print("Firebase can be imported")
+        #if canImport(AdColony)
+        print("Imported")
+        #else
+        print("Not imported")
         #endif
     }
+
 }

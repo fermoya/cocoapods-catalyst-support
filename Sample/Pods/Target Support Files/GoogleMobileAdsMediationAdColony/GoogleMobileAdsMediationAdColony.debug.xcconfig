@@ -1,0 +1,18 @@
+CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO
+CONFIGURATION_BUILD_DIR = ${PODS_CONFIGURATION_BUILD_DIR}/GoogleMobileAdsMediationAdColony
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_ROOT = ${SRCROOT}
+PODS_TARGET_SRCROOT = ${PODS_ROOT}/GoogleMobileAdsMediationAdColony
+PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkIntermediates
+PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
+SKIP_INSTALL = YES
+USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
+VALID_ARCHS[sdk=iphoneos*] = arm64 armv7
+VALID_ARCHS[sdk=iphonesimulator*] = arm64 x86_64
+OTHER_LDFLAGS = $(inherited) 
+FRAMEWORK_SEARCH_PATHS = $(inherited) 
+OTHER_LDFLAGS[sdk=iphone*] = $(inherited) -ObjC -framework "AVFoundation" -framework "AdColony" -framework "AdSupport" -framework "AudioToolbox" -framework "CoreMedia" -framework "CoreServices" -framework "CoreTelephony" -framework "JavaScriptCore" -framework "MessageUI" -framework "SafariServices" -framework "SystemConfiguration" -weak_framework "AppTrackingTransparency" -weak_framework "Social" -weak_framework "StoreKit" -weak_framework "WatchConnectivity" -weak_framework "WebKit" -framework "StoreKit" -framework "CFNetwork" -framework "CoreGraphics" -framework "CoreVideo" -framework "MediaPlayer" -framework "MobileCoreServices" -framework "QuartzCore" -framework "Security" -framework "WebKit" -weak_framework "AdSupport" -weak_framework "JavaScriptCore" -weak_framework "SafariServices"
+FRAMEWORK_SEARCH_PATHS[sdk=iphone*] = $(inherited) "${PODS_ROOT}/AdColony" "${PODS_ROOT}/GoogleMobileAdsMediationAdColony/AdColonyAdapter-4.8.0.0" "${PODS_XCFRAMEWORKS_BUILD_DIR}/AdColony" "${PODS_XCFRAMEWORKS_BUILD_DIR}/GoogleMobileAdsMediationAdColony" "${PODS_ROOT}/Google-Mobile-Ads-SDK/Frameworks/GoogleMobileAdsFramework-Current" "${PODS_XCFRAMEWORKS_BUILD_DIR}/Google-Mobile-Ads-SDK" "${PODS_ROOT}/GoogleAppMeasurement/Frameworks" "${PODS_XCFRAMEWORKS_BUILD_DIR}/GoogleAppMeasurement/AdIdSupport" "${PODS_XCFRAMEWORKS_BUILD_DIR}/GoogleAppMeasurement/WithoutAdIdSupport" "${PODS_ROOT}/GoogleUserMessagingPlatform/Frameworks/Release" "${PODS_XCFRAMEWORKS_BUILD_DIR}/GoogleUserMessagingPlatform" "${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities" "${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC" "${PODS_CONFIGURATION_BUILD_DIR}/nanopb"
+HEADER_SEARCH_PATHS[sdk=iphone*] = $(inherited)

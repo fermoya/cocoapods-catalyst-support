@@ -9,8 +9,8 @@ PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkInterme
 PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
 SKIP_INSTALL = YES
 USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
-OTHER_LDFLAGS = $(inherited) -l"sqlite3" -l"z" 
+OTHER_LDFLAGS = $(inherited) 
 FRAMEWORK_SEARCH_PATHS = $(inherited) 
-OTHER_LDFLAGS[sdk=iphone*] = $(inherited) -ObjC -framework "StoreKit" -l"c++"
-FRAMEWORK_SEARCH_PATHS[sdk=iphone*] = $(inherited) "${PODS_ROOT}/GoogleAppMeasurement/Frameworks" "${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities" "${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC" "${PODS_CONFIGURATION_BUILD_DIR}/nanopb"
+OTHER_LDFLAGS[sdk=iphone*] = $(inherited) -ObjC -l"z" -l"c++" -framework "StoreKit" -l"sqlite3"
+FRAMEWORK_SEARCH_PATHS[sdk=iphone*] = $(inherited) "${PODS_ROOT}/GoogleAppMeasurement/Frameworks" "${PODS_XCFRAMEWORKS_BUILD_DIR}/GoogleAppMeasurement/AdIdSupport" "${PODS_XCFRAMEWORKS_BUILD_DIR}/GoogleAppMeasurement/WithoutAdIdSupport" "${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities" "${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC" "${PODS_CONFIGURATION_BUILD_DIR}/nanopb"
 HEADER_SEARCH_PATHS[sdk=iphone*] = $(inherited)

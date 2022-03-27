@@ -10,9 +10,9 @@ PODS_XCFRAMEWORKS_BUILD_DIR = $(PODS_CONFIGURATION_BUILD_DIR)/XCFrameworkInterme
 PRODUCT_BUNDLE_IDENTIFIER = org.cocoapods.${PRODUCT_NAME:rfc1034identifier}
 SKIP_INSTALL = YES
 USE_RECURSIVE_SCRIPT_INPUTS_IN_SCRIPT_PHASES = YES
-OTHER_LDFLAGS = $(inherited) -l"z" -framework "SystemConfiguration"
+OTHER_LDFLAGS = $(inherited) 
 FRAMEWORK_SEARCH_PATHS = $(inherited) 
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_TARGET_SRCROOT}"
-OTHER_LDFLAGS[sdk=iphone*] = $(inherited) -ObjC -framework "FBLPromises" -framework "Security"
+OTHER_LDFLAGS[sdk=iphone*] = $(inherited) -ObjC -l"z" -framework "SystemConfiguration" -framework "Security" -framework "FBLPromises"
 FRAMEWORK_SEARCH_PATHS[sdk=iphone*] = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC"
 HEADER_SEARCH_PATHS[sdk=iphone*] = $(inherited)
