@@ -93,11 +93,9 @@ module Xcodeproj::Project::Object
     # Dependencies contained in Other Linker Flags
     def other_linker_flags_dependencies
       config = build_configurations.filter do |config| not config.base_configuration_reference.nil? end.first
+      return [] if config.nil?
       other_ldflags = config.resolve_build_setting 'OTHER_LDFLAGS'
-      
-      if other_ldflags.nil? 
-        return [] 
-      end
+      return [] if other_ldflags.nil? 
   
       if other_ldflags.class == String
         other_ldflags = other_ldflags.split ' '
