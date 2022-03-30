@@ -75,16 +75,29 @@ It doesn't "magically" fix the pod. If the pod isn't built for `sdk MacOS`, then
 
 It configures your pods project so that these "unsupported pods" are not linked when building for _macOS_ and will strip those frameworks from the final _Product_. You'll still need to use the precompiler to remove features from your _macCatalyst_ App:
 ```swift
-#if !targetEnvironment(macCatalyst) 
-    // code to be excluded at compilation time from your macOS app
+#if canImport(ToInclude)
+    // import iOS dependency
 #endif
 ```
 or
 ```swift
-#if canImport(FirebaseAnalytics)
-    import FirebaseAnalytics
+#if !targetEnvironment(macCatalyst) 
+    // code to be excluded at compilation time from your macOS app
 #endif
 ```
+If you're using `Objective-C`:
+```objc
+#if __has_include(<ToExclude/ToExclude.h>)
+    // import iOS dependency
+#endif
+```
+or
+```objc
+#if !TARGET_OS_MACCATALYST
+    // code to be excluded at compilation time from your macOS app
+#endif
+```
+
 The advantage is you still get to use them for _iOS_ and _iPadOS_.
 
 ## Example
