@@ -33,7 +33,7 @@ module Pod
       pod_names_to_keep = all_pods.filter do |name| !pod_names_to_remove.include? name end
       $verbose = (defined? podfile.debug) ? podfile.debug : $verbose
 
-      pod_names_to_keep = recursive_dependencies(pod_names_to_keep)
+      pod_names_to_keep = recursive_dependencies(pod_names_to_keep).filter do |name| !pod_names_to_remove.include? name end
       pod_targets_to_keep = pod_targets.filter do |pod| pod_names_to_keep.include? pod.module_name end       # PodTarget
 
       pod_names_to_remove = recursive_dependencies(pod_names_to_remove).filter do |name| !pod_names_to_keep.include? name end.to_set.to_a
